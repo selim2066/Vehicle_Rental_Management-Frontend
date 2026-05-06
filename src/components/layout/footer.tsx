@@ -44,9 +44,9 @@ export default function Footer() {
             </p>
             <div className="flex gap-4">
               {[MessageSquare, Bird, Camera, Share2].map((Icon, i) => (
-                <Link 
-                  key={i} 
-                  href="#" 
+                <Link
+                  key={i}
+                  href="#"
                   className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                 >
                   <Icon className="w-5 h-5" />
@@ -91,11 +91,11 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3 text-muted-foreground">
                 <Phone className="w-5 h-5 text-primary shrink-0" />
-                <span>+880 1707-453950</span>
+                <span>+880 1580-912090</span>
               </li>
               <li className="flex items-center gap-3 text-muted-foreground">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
-                <span>contact@vroom.com</span>
+                <span>mdselimreza2066@gmail.com</span>
               </li>
             </ul>
           </div>

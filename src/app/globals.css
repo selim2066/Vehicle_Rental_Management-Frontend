@@ -131,3 +131,6 @@
     @apply font-sans;
   }
 }
+/* Hide default scrollbar */
+::-webkit-scrollbar { display: none; }
+html { -ms-overflow-style: none; scrollbar-width: none; }

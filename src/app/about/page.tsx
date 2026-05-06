@@ -6,7 +6,7 @@ import { buttonVariants } from "@/components/ui/button";
 
 export default function AboutPage() {
   const stats = [
-    { label: "Founded", value: "2018" },
+    { label: "Founded", value: "2026" },
     { label: "Cars in Fleet", value: "500+" },
     { label: "Happy Clients", value: "12k+" },
     { label: "Cities Covered", value: "15" },
@@ -26,7 +26,7 @@ export default function AboutPage() {
                 Redefining the <span className="text-primary italic">Drive.</span>
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                At Vroom, we believe that renting a car should be more than just a transaction. It should be the start of an adventure. Since 2018, we've been curating a fleet of the world's most exceptional vehicles to ensure that every journey you take is memorable.
+                At Vroom, we believe that renting a car should be more than just a transaction. It should be the start of an adventure. Since 2026, we've been curating a fleet of the world's most exceptional vehicles to ensure that every journey you take is memorable.
               </p>
               <div className="grid grid-cols-2 gap-8">
                 {stats.map((stat) => (
@@ -39,9 +39,9 @@ export default function AboutPage() {
             </div>
             <div className="relative">
               <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1549399542-7e3f8b79c3d9?q=80&w=800&auto=format&fit=crop" 
-                  className="w-full h-full object-cover" 
+                <img
+                  src="https://images.unsplash.com/photo-1549399542-7e3f8b79c3d9?q=80&w=800&auto=format&fit=crop"
+                  className="w-full h-full object-cover"
                   alt="Our Heritage"
                 />
               </div>

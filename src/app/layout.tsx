@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { AuthProvider } from "@/components/providers/auth-provider";
 import { Toaster } from "@/components/ui/sonner";
 import Footer from "@/components/layout/footer";
+import { CarScrollbar } from "@/components/ui/car-scrollbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -73,6 +74,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <CarScrollbar />
           <AuthProvider>
             <SmoothScrollProvider>
               <div className="flex flex-col min-h-screen">
