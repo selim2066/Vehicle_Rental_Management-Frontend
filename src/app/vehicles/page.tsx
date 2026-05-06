@@ -1,7 +1,8 @@
 import { vehicleService } from "@/services/vehicle.service";
 import Navbar from "@/components/layout/navbar";
 import VehicleCard from "@/components/vehicles/vehicle-card";
-import { Filter } from "lucide-react";
+import VehicleFilters from "@/components/vehicles/vehicle-filters";
+import { Filter, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -12,86 +13,101 @@ export default async function VehiclesPage({
   searchParams: Promise<Record<string, string>>;
 }) {
   const params = await searchParams;
-  const currentCategory = params.type || "all";
   
   let vehicles: any[] = [];
+  let pagination = { total: 0, page: 1, limit: 12, totalPages: 1 };
+  
   try {
     const response = await vehicleService.getAll(params);
     if (response && response.success && Array.isArray(response.data)) {
       vehicles = response.data;
+      // Mocking pagination for now as backend might not return it yet
+      pagination = { 
+        total: vehicles.length, 
+        page: Number(params.page) || 1, 
+        limit: 12, 
+        totalPages: Math.ceil(vehicles.length / 12) || 1 
+      };
     }
   } catch (error) {
     console.error("Failed to fetch vehicles:", error);
   }
 
-  const categories = [
-    { name: "All", value: "all" },
-    { name: "Luxury", value: "luxury" },
-    { name: "SUV", value: "SUV" },
-    { name: "Sedan", value: "sedan" },
-    { name: "Sports", value: "sports" },
-    { name: "Electric", value: "electric" },
-  ];
-
   return (
-    <main className="min-h-screen pt-24">
+    <main className="min-h-screen pt-24 pb-24">
       <Navbar />
       
       {/* Header Section */}
-      <section className="py-12 bg-muted/30">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div>
-              <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">Explore Our Fleet</h1>
-              <p className="text-muted-foreground max-w-xl">
-                Choose from our wide range of premium vehicles. Whether you're looking for luxury, speed, or utility, we have the perfect ride for you.
-              </p>
-            </div>
-            <div className="flex gap-3">
-              <div className="text-sm font-semibold flex items-center gap-2 bg-background border border-border/40 px-4 py-2 rounded-full shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                {vehicles.length} Vehicles Available
-              </div>
-            </div>
+      <section className="py-16 bg-muted/20 border-b border-border/40">
+        <div className="max-w-[1400px] mx-auto px-6">
+          <div className="space-y-6 text-center max-w-3xl mx-auto mb-12">
+            <h1 className="text-5xl md:text-7xl font-heading font-bold tracking-tighter">
+              Discover Your <span className="text-primary italic">Perfect</span> Ride
+            </h1>
+            <p className="text-muted-foreground text-xl">
+              From high-performance sports cars to spacious family SUVs, find the premium vehicle that suits your journey.
+            </p>
           </div>
 
-          {/* Categories Filter Bar */}
-          <div className="flex items-center gap-3 mt-12 overflow-x-auto pb-4 no-scrollbar">
-            {categories.map((cat) => (
-              <Link
-                key={cat.value}
-                href={cat.value === "all" ? "/vehicles" : `/vehicles?type=${cat.value}`}
-                className={cn(
-                  "px-6 py-2.5 rounded-full text-sm font-bold transition-all whitespace-nowrap border",
-                  currentCategory === cat.value
-                    ? "bg-primary text-primary-foreground border-primary"
-                    : "bg-background text-foreground/60 border-border/40 hover:border-primary/40 hover:text-primary"
-                )}
-              >
-                {cat.name}
-              </Link>
-            ))}
-          </div>
+          <VehicleFilters />
         </div>
       </section>
 
       {/* Grid Section */}
-      <section className="py-12 pb-24">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-16">
+        <div className="max-w-[1400px] mx-auto px-6">
           {vehicles.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {vehicles.map((vehicle) => (
-                <VehicleCard key={vehicle.id} vehicle={vehicle} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-24 bg-card rounded-[3rem] border border-dashed border-border/60">
-              <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center mx-auto mb-6">
-                <Filter className="w-10 h-10 text-muted-foreground" />
+            <>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                {vehicles.map((vehicle) => (
+                  <VehicleCard key={vehicle.id} vehicle={vehicle} />
+                ))}
               </div>
-              <h2 className="text-2xl font-bold mb-2">No vehicles found</h2>
-              <p className="text-muted-foreground">Try adjusting your filters or check back later.</p>
-              <Button variant="link" asChild className="mt-4">
+
+              {/* Pagination */}
+              {pagination.totalPages > 1 && (
+                <div className="flex justify-center items-center gap-4 mt-20">
+                  <Button 
+                    variant="outline" 
+                    className="rounded-full w-12 h-12 p-0 border-border/40"
+                    disabled={pagination.page <= 1}
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </Button>
+                  <div className="flex gap-2">
+                    {[...Array(pagination.totalPages)].map((_, i) => (
+                      <Button
+                        key={i}
+                        variant={pagination.page === i + 1 ? "default" : "outline"}
+                        className={cn(
+                          "w-12 h-12 rounded-full font-bold",
+                          pagination.page === i + 1 ? "shadow-lg shadow-primary/20" : "border-border/40"
+                        )}
+                      >
+                        {i + 1}
+                      </Button>
+                    ))}
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    className="rounded-full w-12 h-12 p-0 border-border/40"
+                    disabled={pagination.page >= pagination.totalPages}
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </Button>
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="text-center py-32 bg-card rounded-[4rem] border border-dashed border-border/60 max-w-4xl mx-auto">
+              <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center mx-auto mb-8">
+                <Filter className="w-12 h-12 text-muted-foreground" />
+              </div>
+              <h2 className="text-3xl font-bold mb-4 tracking-tight">No vehicles matched your search</h2>
+              <p className="text-muted-foreground text-lg mb-8 max-w-md mx-auto">
+                Try adjusting your filters or search terms to find what you're looking for.
+              </p>
+              <Button size="lg" className="rounded-full px-10 font-bold" asChild>
                 <Link href="/vehicles">Clear all filters</Link>
               </Button>
             </div>
@@ -101,3 +117,4 @@ export default async function VehiclesPage({
     </main>
   );
 }
+

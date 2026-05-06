@@ -5,6 +5,7 @@ import SmoothScrollProvider from "@/components/providers/smooth-scroll-provider"
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { AuthProvider } from "@/components/providers/auth-provider";
 import { Toaster } from "@/components/ui/sonner";
+import Footer from "@/components/layout/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,9 +23,38 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Vroom | Premium Vehicle Rental System",
+  metadataBase: new URL("https://vroom-rentals.vercel.app"),
+  title: {
+    default: "Vroom | Premium Vehicle Rental & Luxury Fleet",
+    template: "%s | Vroom"
+  },
   description: "Experience the ultimate in luxury and performance with Vroom. Our premium fleet and seamless booking system make your next journey unforgettable.",
+  keywords: ["luxury car rental", "premium vehicles", "car hire dhaka", "vroom rentals", "sports car rental"],
+  authors: [{ name: "Vroom Team" }],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://vroom-rentals.vercel.app",
+    siteName: "Vroom",
+    title: "Vroom | Premium Vehicle Rental & Luxury Fleet",
+    description: "Rent the world's most premium vehicles with ease. High-performance sports cars, luxury sedans, and spacious SUVs.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Vroom Premium Fleet",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vroom | Premium Vehicle Rental",
+    description: "Experience luxury on the road with Vroom's premium fleet.",
+    images: ["/og-image.jpg"],
+  },
 };
+
 
 export default function RootLayout({
   children,
@@ -45,7 +75,12 @@ export default function RootLayout({
         >
           <AuthProvider>
             <SmoothScrollProvider>
-              {children}
+              <div className="flex flex-col min-h-screen">
+                <div className="flex-grow">
+                  {children}
+                </div>
+                <Footer />
+              </div>
             </SmoothScrollProvider>
           </AuthProvider>
           <Toaster richColors position="top-right" />
