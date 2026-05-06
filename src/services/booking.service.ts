@@ -18,6 +18,7 @@ export interface Booking {
   status: 'active' | 'returned' | 'cancelled' | 'pending';
   created_at: string;
   vehicle?: any;
+  user?: any;
 }
 
 export const bookingService = {
@@ -48,6 +49,40 @@ export const bookingService = {
 
     if (!res.ok) {
       throw new Error("Failed to fetch bookings");
+    }
+
+    return res.json();
+  },
+
+  updateStatus: async (id: number, status: string, token: string): Promise<ApiResponse<Booking>> => {
+    const res = await fetch(`${API_BASE_URL}/bookings/${id}/status`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ status }),
+    });
+
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.message || "Failed to update booking status");
+    }
+
+    return res.json();
+  },
+
+  delete: async (id: number, token: string): Promise<ApiResponse<any>> => {
+    const res = await fetch(`${API_BASE_URL}/bookings/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.message || "Failed to delete booking");
     }
 
     return res.json();

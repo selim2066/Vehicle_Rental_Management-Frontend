@@ -114,7 +114,7 @@ export default function Navbar() {
                   </AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-64 mt-2 p-2 rounded-2xl" align="end" forceMount>
+              <DropdownMenuContent className="w-64 mt-2 p-2 rounded-2xl" align="end">
                 <DropdownMenuGroup>
                   <DropdownMenuLabel className="font-normal p-4">
                     <div className="flex flex-col space-y-2">

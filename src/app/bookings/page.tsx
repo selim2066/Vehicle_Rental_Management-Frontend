@@ -115,7 +115,7 @@ export default function BookingsPage() {
                 
                 <div className="flex-1 text-center md:text-left">
                   <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
-                    <h3 className="text-xl font-bold">{booking.vehicles?.vehicle_name || `Booking #${booking.id}`}</h3>
+                    <h3 className="text-xl font-bold">{booking.vehicle?.vehicle_name || `Booking #${booking.id}`}</h3>
                     <span className={cn(
                       "px-3 py-1 rounded-full text-[10px] font-bold uppercase border",
                       booking.status === 'active' ? "bg-green-500/10 text-green-500 border-green-500/20" :
@@ -132,7 +132,7 @@ export default function BookingsPage() {
                     </div>
                     <div className="flex items-center gap-2">
                       <CreditCard className="w-4 h-4" />
-                      Total: <span className="text-foreground font-bold">${parseFloat(booking.total_price).toLocaleString()}</span>
+                      Total: <span className="text-foreground font-bold">${Number(booking.total_price).toLocaleString()}</span>
                     </div>
                   </div>
                 </div>

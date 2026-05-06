@@ -21,6 +21,8 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator
 } from "@/components/ui/dropdown-menu";
+import { toast } from "sonner";
+import Link from "next/link";
 
 export default function FleetManagementPage() {
   const { user } = useAuth();
@@ -47,6 +49,19 @@ export default function FleetManagementPage() {
     v.vehicle_name.toLowerCase().includes(search.toLowerCase()) ||
     v.brand.toLowerCase().includes(search.toLowerCase())
   );
+
+  const handleDelete = async (id: number) => {
+    if (!confirm("Are you sure you want to delete this vehicle? This action cannot be undone.")) return;
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+      await vehicleService.delete(id, token);
+      toast.success("Vehicle deleted successfully");
+      fetchVehicles();
+    } catch (error: any) {
+      toast.error(error.message || "Failed to delete vehicle");
+    }
+  };
 
   return (
     <div className="space-y-12">
@@ -165,14 +180,22 @@ export default function FleetManagementPage() {
                           <MoreVertical className="w-5 h-5" />
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="w-56 rounded-2xl p-2">
-                          <DropdownMenuItem className="rounded-xl font-bold py-3 cursor-pointer gap-2">
-                            <Eye className="w-4 h-4 text-primary" /> View Details
+                          <DropdownMenuItem asChild>
+                            <Link href={`/vehicles/${vehicle.id}`} className="rounded-xl font-bold py-3 cursor-pointer gap-2">
+                              <Eye className="w-4 h-4 text-primary" /> View Details
+                            </Link>
                           </DropdownMenuItem>
-                          <DropdownMenuItem className="rounded-xl font-bold py-3 cursor-pointer gap-2">
+                          <DropdownMenuItem 
+                            onClick={() => toast.info("Edit feature coming soon!")}
+                            className="rounded-xl font-bold py-3 cursor-pointer gap-2"
+                          >
                             <Edit3 className="w-4 h-4 text-blue-500" /> Edit Vehicle
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
-                          <DropdownMenuItem className="rounded-xl font-bold py-3 cursor-pointer gap-2 text-rose-500 hover:bg-rose-500/10">
+                          <DropdownMenuItem 
+                            onClick={() => handleDelete(vehicle.id)}
+                            className="rounded-xl font-bold py-3 cursor-pointer gap-2 text-rose-500 hover:bg-rose-500/10"
+                          >
                             <Trash2 className="w-4 h-4" /> Delete Vehicle
                           </DropdownMenuItem>
                         </DropdownMenuContent>

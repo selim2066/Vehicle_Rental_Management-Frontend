@@ -14,10 +14,11 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Vehicle } from "@/types";
 
 export default async function Home() {
   // Fetch featured vehicles for the landing page with safety check
-  let featuredVehicles = [];
+  let featuredVehicles: Vehicle[] = [];
   try {
     const response = await vehicleService.getAll();
     if (response && response.success && Array.isArray(response.data)) {

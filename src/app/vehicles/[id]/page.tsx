@@ -4,22 +4,10 @@ import BookingForm from "@/components/vehicles/booking-form";
 import ImageGallery from "@/components/vehicles/image-gallery";
 import ReviewSection from "@/components/vehicles/review-section";
 import VehicleCard from "@/components/vehicles/vehicle-card";
-import { vehicleService } from "@/services/vehicle.service";
-import { 
-  Calendar, 
-  CheckCircle2, 
-  ChevronRight, 
-  Fuel, 
-  Gauge, 
-  Info, 
-  MapPin, 
-  ShieldCheck, 
-  Star, 
-  Users, 
-  Zap 
-} from "lucide-react";
-import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { vehicleService } from "@/services/vehicle.service";
+import { Calendar, CheckCircle2, ChevronRight, Fuel, Gauge, Info, MapPin, ShieldCheck, Star, Users, Zap } from "lucide-react";
+import Link from "next/link";
 
 export default async function VehicleDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -41,8 +29,8 @@ export default async function VehicleDetailsPage({ params }: { params: Promise<{
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Vehicle Not Found</h1>
-          <Link 
-            href="/vehicles" 
+          <Link
+            href="/vehicles"
             className={cn(buttonVariants({}), "mt-4")}
           >
             Back to Fleet
@@ -55,7 +43,7 @@ export default async function VehicleDetailsPage({ params }: { params: Promise<{
   return (
     <main className="min-h-screen bg-background pb-24">
       <Navbar />
-      
+
       {/* Hero Section with Breadcrumbs */}
       <section className="pt-32 pb-12 px-6">
         <div className="max-w-7xl mx-auto">
@@ -123,9 +111,9 @@ export default async function VehicleDetailsPage({ params }: { params: Promise<{
                 <div className="max-w-3xl">
                   <h3 className="text-3xl font-bold mb-6 tracking-tight">Vehicle Overview</h3>
                   <p className="text-muted-foreground leading-relaxed text-xl">
-                    Experience the ultimate in driving pleasure with the {vehicle.vehicle_name}. 
-                    This {vehicle.brand} model combines performance, comfort, and style, making it 
-                    the perfect choice for both business trips and weekend getaways. Our fleet is 
+                    Experience the ultimate in driving pleasure with the {vehicle.vehicle_name}.
+                    This {vehicle.brand} model combines performance, comfort, and style, making it
+                    the perfect choice for both business trips and weekend getaways. Our fleet is
                     meticulously maintained to ensure the highest standards of safety and reliability.
                   </p>
                 </div>

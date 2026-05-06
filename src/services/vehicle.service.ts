@@ -60,5 +60,57 @@ export const vehicleService = {
       json.data = json.data.map(mapVehicle);
     }
     return json;
+  },
+
+  create: async (data: any, token: string): Promise<ApiResponse<Vehicle>> => {
+    const res = await fetch(`${API_BASE_URL}/vehicles`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.message || "Failed to create vehicle");
+    }
+
+    return res.json();
+  },
+
+  update: async (id: number | string, data: any, token: string): Promise<ApiResponse<Vehicle>> => {
+    const res = await fetch(`${API_BASE_URL}/vehicles/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.message || "Failed to update vehicle");
+    }
+
+    return res.json();
+  },
+
+  delete: async (id: number | string, token: string): Promise<ApiResponse<any>> => {
+    const res = await fetch(`${API_BASE_URL}/vehicles/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.message || "Failed to delete vehicle");
+    }
+
+    return res.json();
   }
 };

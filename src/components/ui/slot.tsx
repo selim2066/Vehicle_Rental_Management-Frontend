@@ -10,7 +10,7 @@ export const Slot = React.forwardRef<HTMLElement, SlotProps>((props, ref) => {
   if (React.isValidElement(children)) {
     return React.cloneElement(children, {
       ...slotProps,
-      ...children.props,
+      ...(children.props as any),
       ref: (node: any) => {
         if (typeof ref === "function") {
           ref(node)

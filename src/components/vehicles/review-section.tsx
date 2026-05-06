@@ -2,7 +2,8 @@
 
 import { Star, MessageSquare } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Progress } from "@/components/ui/progress"; // I'll need to add this component
+import { Progress } from "@/components/ui/progress";
+import { cn } from "@/lib/utils";
 
 const mockReviews = [
   {
@@ -23,7 +24,7 @@ const mockReviews = [
   },
 ];
 
-export default function ReviewSection({ vehicleId }: { vehicleId: string }) {
+export default function ReviewSection({ vehicleId }: { vehicleId: number | string }) {
   return (
     <div className="space-y-12">
       <div className="flex flex-col md:flex-row gap-12 items-start">
@@ -97,5 +98,4 @@ export default function ReviewSection({ vehicleId }: { vehicleId: string }) {
   );
 }
 
-// Helper to make it work
-const cn = (...classes: any[]) => classes.filter(Boolean).join(" ");
+

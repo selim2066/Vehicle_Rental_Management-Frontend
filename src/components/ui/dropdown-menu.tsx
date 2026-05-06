@@ -95,7 +95,7 @@ function DropdownMenuItem({
       data-slot="dropdown-menu-item"
       data-inset={inset}
       data-variant={variant}
-      render={asChild ? children : undefined}
+      render={asChild ? (children as any) : undefined}
       className={cn(
         "group/dropdown-menu-item relative flex cursor-default items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm outline-hidden select-none transition-all duration-200",
         "focus:bg-accent focus:text-accent-foreground focus:bg-primary/10 focus:text-primary not-data-[variant=destructive]:focus:**:text-primary",
