@@ -28,6 +28,11 @@ export default function DashboardPage() {
       return;
     }
 
+    if (user && user.role === 'admin') {
+      router.push("/admin");
+      return;
+    }
+
     if (user) {
       fetchBookings();
     }
