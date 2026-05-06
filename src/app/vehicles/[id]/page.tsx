@@ -155,7 +155,11 @@ export default async function VehicleDetailsPage({ params }: { params: Promise<{
                 </div>
               </div>
 
-              <ReviewSection vehicleId={vehicle.id} />
+              <ReviewSection 
+                vehicleId={vehicle.id} 
+                initialAverageRating={vehicle.average_rating}
+                initialTotalReviews={vehicle.total_reviews}
+              />
             </div>
 
             {/* Right Column: Booking Form */}

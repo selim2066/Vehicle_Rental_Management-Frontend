@@ -16,6 +16,20 @@ export interface Vehicle {
   features: string[];
   created_at: string;
   updated_at: string;
+  average_rating?: number;
+  total_reviews?: number;
+  reviews?: Review[];
+}
+
+export interface Review {
+  id: number;
+  rating: number;
+  comment: string;
+  created_at: string;
+  users: {
+    name: string;
+    avatar: string | null;
+  };
 }
 
 export interface ApiResponse<T> {
