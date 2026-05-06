@@ -14,7 +14,7 @@ export interface AuthResponse {
 
 export const authService = {
   login: async (credentials: any): Promise<ApiResponse<AuthResponse>> => {
-    const res = await fetch(`${API_BASE_URL}/auth/login`, {
+    const res = await fetch(`${API_BASE_URL}/auth/signin`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credentials),
@@ -25,14 +25,28 @@ export const authService = {
       throw new Error(error.message || "Failed to sign in");
     }
 
-    return res.json();
+    const json = await res.json();
+    // Map accessToken to token for internal frontend use if needed, 
+    // but better to keep it consistent. I'll map it to token for the provider.
+    if (json.success && json.data.accessToken) {
+      json.data.token = json.data.accessToken;
+    }
+    return json;
   },
 
-  register: async (data: any): Promise<ApiResponse<AuthResponse>> => {
-    const res = await fetch(`${API_BASE_URL}/auth/register`, {
+  register: async (data: any): Promise<ApiResponse<any>> => {
+    // Map frontend fields to backend fields
+    const payload = {
+      name: data.full_name,
+      email: data.email,
+      password: data.password,
+      phone: data.phone_number,
+    };
+
+    const res = await fetch(`${API_BASE_URL}/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify(payload),
     });
 
     if (!res.ok) {
@@ -44,7 +58,7 @@ export const authService = {
   },
 
   getMe: async (token: string): Promise<ApiResponse<any>> => {
-    const res = await fetch(`${API_BASE_URL}/auth/me`, {
+    const res = await fetch(`${API_BASE_URL}/users/me`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

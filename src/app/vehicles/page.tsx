@@ -5,7 +5,15 @@ import { Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default async function VehiclesPage() {
-  const { data: vehicles } = await vehicleService.getAll();
+  let vehicles: any[] = [];
+  try {
+    const response = await vehicleService.getAll();
+    if (response && response.success && Array.isArray(response.data)) {
+      vehicles = response.data;
+    }
+  } catch (error) {
+    console.error("Failed to fetch vehicles:", error);
+  }
 
   return (
     <main className="min-h-screen pt-24">

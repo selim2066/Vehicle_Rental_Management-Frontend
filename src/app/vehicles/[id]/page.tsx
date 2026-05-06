@@ -10,8 +10,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import BookingForm from "@/components/vehicles/booking-form";
 
-export default async function VehicleDetailsPage({ params }: { params: { id: string } }) {
-  const { data: vehicle } = await vehicleService.getById(params.id);
+export default async function VehicleDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const { data: vehicle } = await vehicleService.getById(id);
 
   if (!vehicle) {
     return (
