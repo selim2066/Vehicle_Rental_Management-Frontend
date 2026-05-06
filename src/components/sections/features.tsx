@@ -56,7 +56,7 @@ export default function Features() {
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             className="text-4xl md:text-5xl font-heading font-bold mb-6 tracking-tight"
           >
             Why Choose <span className="text-primary">Vroom?</span>
@@ -64,7 +64,7 @@ export default function Features() {
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ delay: 0.1 }}
             className="text-foreground/60 max-w-2xl mx-auto text-lg"
           >
@@ -78,7 +78,7 @@ export default function Features() {
               key={feature.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ delay: index * 0.1 }}
               className="group p-8 rounded-[2.5rem] bg-card border border-border/40 hover:border-primary/40 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5"
             >

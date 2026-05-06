@@ -45,7 +45,7 @@ export default function FAQ() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
         >
           <Accordion className="w-full space-y-4">
             {faqs.map((faq, i) => (

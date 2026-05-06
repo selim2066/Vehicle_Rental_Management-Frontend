@@ -11,7 +11,7 @@ export default function Newsletter() {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: false }}
         className="max-w-7xl mx-auto rounded-[4rem] bg-card border border-border/40 overflow-hidden relative group"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 pointer-events-none" />

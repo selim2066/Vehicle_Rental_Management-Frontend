@@ -17,7 +17,7 @@ export default function VehicleCard({ vehicle }: VehicleCardProps) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: false }}
       className="group bg-card border border-border/40 rounded-[2.5rem] overflow-hidden hover:border-primary/40 transition-all duration-500 shadow-sm hover:shadow-2xl hover:shadow-primary/5 relative"
     >
       {/* Image Container */}

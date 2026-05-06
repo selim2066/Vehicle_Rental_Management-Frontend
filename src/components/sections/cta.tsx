@@ -13,7 +13,7 @@ export default function CTA() {
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           className="relative bg-primary dark:bg-muted/10 rounded-[3rem] p-12 md:p-24 overflow-hidden text-center border border-primary/10"
         >
           {/* Background Decor */}

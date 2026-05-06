@@ -48,7 +48,7 @@ export default function Testimonials() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               className="p-10 rounded-[3rem] bg-card border border-border/40 relative group hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500"
             >
               <Quote className="absolute top-8 right-8 w-12 h-12 text-primary/10 transition-transform duration-500 group-hover:scale-110" />

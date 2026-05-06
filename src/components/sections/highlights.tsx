@@ -58,7 +58,7 @@ export default function Highlights() {
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               className="relative aspect-square rounded-[4rem] overflow-hidden group shadow-2xl shadow-primary/20"
             >
               <img 
@@ -78,7 +78,7 @@ export default function Highlights() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               className="absolute -bottom-8 -left-8 p-8 bg-card border border-border/40 rounded-[2.5rem] shadow-2xl hidden md:block"
             >
               <div className="flex items-center gap-4">

@@ -19,11 +19,13 @@ function Counter({ value }: { value: number }) {
     stiffness: 100,
     restDelta: 0.001
   });
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: false, margin: "-50px" });
 
   useEffect(() => {
     if (isInView) {
       motionValue.set(value);
+    } else {
+      motionValue.set(0);
     }
   }, [motionValue, isInView, value]);
 
@@ -61,7 +63,7 @@ export default function Statistics() {
                 stiffness: 100,
                 delay: i * 0.1 
               }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               className="text-center group"
             >
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-[2rem] bg-white/10 mb-6 group-hover:bg-white/20 group-hover:rotate-12 transition-all duration-500 shadow-lg">
