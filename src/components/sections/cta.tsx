@@ -1,9 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default function CTA() {
   return (
@@ -35,12 +36,13 @@ export default function CTA() {
             </p>
             
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <Button size="lg" variant="secondary" className="rounded-full px-10 h-16 text-lg font-bold group" asChild>
-                <Link href="/signup">
-                  Get Started for Free
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </Button>
+              <Link 
+                href="/signup" 
+                className={cn(buttonVariants({ variant: "secondary", size: "lg" }), "rounded-full px-10 h-16 text-lg font-bold group")}
+              >
+                Get Started for Free
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
               <Button size="lg" className="rounded-full px-10 h-16 text-lg font-bold bg-white/10 hover:bg-white/20 border border-white/10 backdrop-blur-md text-white">
                 View All Vehicles
               </Button>

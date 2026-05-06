@@ -4,9 +4,10 @@ import Features from "@/components/sections/features";
 import CTA from "@/components/sections/cta";
 import { vehicleService } from "@/services/vehicle.service";
 import VehicleCard from "@/components/vehicles/vehicle-card";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default async function Home() {
   // Fetch featured vehicles for the landing page with safety check
@@ -35,12 +36,13 @@ export default async function Home() {
                 Explore our curated selection of high-performance and luxury vehicles, available for immediate rental.
               </p>
             </div>
-            <Button variant="outline" className="rounded-full px-8 h-12 gap-2 border-border/40 group" asChild>
-              <Link href="/vehicles">
-                View All Vehicles
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
+            <Link 
+              href="/vehicles" 
+              className={cn(buttonVariants({ variant: "outline" }), "rounded-full px-8 h-12 gap-2 border-border/40 group")}
+            >
+              View All Vehicles
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

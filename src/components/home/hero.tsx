@@ -4,8 +4,9 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { gsap } from "gsap";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { ArrowRight, Play, Car as CarIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -80,12 +81,13 @@ export default function Hero() {
           </p>
           
           <div ref={actionsRef} className="flex flex-wrap items-center gap-4">
-            <Button size="lg" className="rounded-full px-8 h-14 text-lg group" asChild>
-              <Link href="/vehicles">
-                Browse Fleet
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
+            <Link 
+              href="/vehicles" 
+              className={cn(buttonVariants({ size: "lg" }), "rounded-full px-8 h-14 text-lg group")}
+            >
+              Browse Fleet
+              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
             <Button variant="outline" size="lg" className="rounded-full px-8 h-14 text-lg gap-2 border-white/10 hover:bg-white/5">
               <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
                 <Play className="w-3 h-3 text-primary-foreground ml-0.5" />

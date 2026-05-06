@@ -5,7 +5,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Users, Fuel, Gauge, ArrowUpRight } from "lucide-react";
 import { Vehicle } from "@/types";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 interface VehicleCardProps {
   vehicle: Vehicle;
@@ -22,7 +23,7 @@ export default function VehicleCard({ vehicle }: VehicleCardProps) {
       {/* Image Container */}
       <div className="relative aspect-[16/10] overflow-hidden bg-muted">
         <Image
-          src={vehicle.images?.[0] || "/images/placeholder-car.png"}
+          src={vehicle.images?.[0] || "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800&auto=format&fit=crop"}
           alt={vehicle.vehicle_name}
           fill
           className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -68,12 +69,13 @@ export default function VehicleCard({ vehicle }: VehicleCardProps) {
         </div>
 
         {/* Action Button */}
-        <Button className="w-full rounded-2xl h-12 font-bold group/btn" asChild>
-          <Link href={`/vehicles/${vehicle.id}`}>
-            View Details
-            <ArrowUpRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
-          </Link>
-        </Button>
+        <Link 
+          href={`/vehicles/${vehicle.id}`} 
+          className={cn(buttonVariants({}), "w-full rounded-2xl h-12 font-bold group/btn")}
+        >
+          View Details
+          <ArrowUpRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+        </Link>
       </div>
     </motion.div>
   );

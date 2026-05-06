@@ -6,9 +6,10 @@ import {
   MapPin, Star, ArrowLeft, ChevronRight,
   Zap, Info, CheckCircle2
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import BookingForm from "@/components/vehicles/booking-form";
+import { cn } from "@/lib/utils";
 
 export default async function VehicleDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -19,9 +20,12 @@ export default async function VehicleDetailsPage({ params }: { params: Promise<{
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Vehicle Not Found</h1>
-          <Button asChild>
-            <Link href="/vehicles">Back to Fleet</Link>
-          </Button>
+          <Link 
+            href="/vehicles" 
+            className={cn(buttonVariants({}), "mt-4")}
+          >
+            Back to Fleet
+          </Link>
         </div>
       </div>
     );
@@ -68,7 +72,7 @@ export default async function VehicleDetailsPage({ params }: { params: Promise<{
               {/* Main Image */}
               <div className="relative aspect-[16/9] rounded-[3rem] overflow-hidden bg-muted group">
                 <Image
-                  src={vehicle.images?.[0] || "/images/placeholder-car.png"}
+                  src={vehicle.images?.[0] || "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800&auto=format&fit=crop"}
                   alt={vehicle.vehicle_name}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"

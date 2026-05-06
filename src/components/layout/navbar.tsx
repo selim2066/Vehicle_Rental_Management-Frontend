@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Car, User, Menu, X, Moon, Sun } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/components/providers/auth-provider";
 import { LogOut, LayoutDashboard } from "lucide-react";
@@ -86,27 +86,32 @@ export default function Navbar() {
 
           {user ? (
             <div className="flex items-center gap-3">
-              <Button variant="ghost" size="sm" className="gap-2 rounded-full px-4 border border-border/40" asChild>
-                <Link href="/dashboard">
-                  <LayoutDashboard className="w-4 h-4" />
-                  Dashboard
-                </Link>
-              </Button>
+              <Link 
+                href="/dashboard" 
+                className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "gap-2 rounded-full px-4 border border-border/40")}
+              >
+                <LayoutDashboard className="w-4 h-4" />
+                Dashboard
+              </Link>
               <Button variant="ghost" size="icon" onClick={logout} className="rounded-full w-10 h-10 text-destructive hover:bg-destructive/10">
                 <LogOut className="w-5 h-5" />
               </Button>
             </div>
           ) : (
             <>
-              <Button variant="ghost" size="sm" className="gap-2" asChild>
-                <Link href="/signin">
-                  <User className="w-4 h-4" />
-                  Sign In
-                </Link>
-              </Button>
-              <Button size="sm" className="rounded-full px-6" asChild>
-                <Link href="/signup">Book Now</Link>
-              </Button>
+              <Link 
+                href="/signin" 
+                className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "gap-2")}
+              >
+                <User className="w-4 h-4" />
+                Sign In
+              </Link>
+              <Link 
+                href="/signup" 
+                className={cn(buttonVariants({ size: "sm" }), "rounded-full px-6")}
+              >
+                Book Now
+              </Link>
             </>
           )}
         </div>
@@ -153,12 +158,14 @@ export default function Navbar() {
             </div>
             {user ? (
               <>
-                <Button className="w-full justify-start gap-2" variant="ghost" asChild onClick={() => setMobileMenuOpen(false)}>
-                  <Link href="/dashboard">
-                    <LayoutDashboard className="w-4 h-4" />
-                    Dashboard
-                  </Link>
-                </Button>
+                <Link 
+                  href="/dashboard" 
+                  className={cn(buttonVariants({ variant: "ghost" }), "w-full justify-start gap-2")}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <LayoutDashboard className="w-4 h-4" />
+                  Dashboard
+                </Link>
                 <Button className="w-full justify-start gap-2 text-destructive hover:bg-destructive/10" variant="ghost" onClick={logout}>
                   <LogOut className="w-4 h-4" />
                   Logout
@@ -166,15 +173,21 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Button className="w-full justify-start gap-2" variant="ghost" asChild onClick={() => setMobileMenuOpen(false)}>
-                  <Link href="/signin">
-                    <User className="w-4 h-4" />
-                    Sign In
-                  </Link>
-                </Button>
-                <Button className="w-full rounded-full" asChild onClick={() => setMobileMenuOpen(false)}>
-                  <Link href="/signup">Book Now</Link>
-                </Button>
+                <Link 
+                  href="/signin" 
+                  className={cn(buttonVariants({ variant: "ghost" }), "w-full justify-start gap-2")}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <User className="w-4 h-4" />
+                  Sign In
+                </Link>
+                <Link 
+                  href="/signup" 
+                  className={cn(buttonVariants({}), "w-full rounded-full justify-center")}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Book Now
+                </Link>
               </>
             )}
           </div>
