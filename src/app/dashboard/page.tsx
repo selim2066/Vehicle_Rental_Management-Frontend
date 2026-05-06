@@ -13,6 +13,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { bookingService } from "@/services/booking.service";
 
 export default function DashboardPage() {
   const { user, token, logout, isLoading } = useAuth();
@@ -27,16 +28,21 @@ export default function DashboardPage() {
       return;
     }
 
-    if (user && token) {
+    if (user) {
       fetchBookings();
     }
-  }, [user, isLoading, router, token]);
+  }, [user, isLoading, router]);
 
   const fetchBookings = async () => {
     try {
-      const response = await bookingService.getMyBookings(token!);
-      if (response.success) {
-        setBookings(response.data);
+      const storedToken = localStorage.getItem("token");
+      if (!storedToken) return;
+
+      const response = await bookingService.getMyBookings(storedToken);
+      const bookingsData = response.bookings || (response as any).data?.bookings || (response as any).data || [];
+      
+      if (Array.isArray(bookingsData)) {
+        setBookings(bookingsData);
       }
     } catch (error) {
       console.error("Failed to fetch bookings:", error);

@@ -39,7 +39,7 @@ export const bookingService = {
     return res.json();
   },
 
-  getMyBookings: async (token: string): Promise<ApiResponse<Booking[]>> => {
+  getMyBookings: async (token: string): Promise<{ success: boolean, bookings: Booking[], meta: any }> => {
     const res = await fetch(`${API_BASE_URL}/bookings`, {
       headers: {
         Authorization: `Bearer ${token}`,
