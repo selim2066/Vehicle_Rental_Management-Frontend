@@ -11,6 +11,7 @@ import { useAuth } from "@/components/providers/auth-provider";
 import { LogOut, LayoutDashboard } from "lucide-react";
 
 const navLinks = [
+  { name: "Home", href: "/" },
   { name: "Fleet", href: "/vehicles" },
   { name: "Deals", href: "/deals" },
   { name: "How it works", href: "/how-it-works" },

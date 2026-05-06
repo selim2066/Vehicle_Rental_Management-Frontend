@@ -62,10 +62,10 @@ export default function BookingForm({ vehicle }: BookingFormProps) {
       }, token);
 
       if (response.success) {
-        toast.success("Booking confirmed! Redirecting to your dashboard...");
+        toast.success("Booking confirmed! Redirecting...");
         setTimeout(() => {
-          router.push("/dashboard");
-        }, 2000);
+          router.push("/booking-success");
+        }, 1500);
       }
     } catch (error: any) {
       toast.error(error.message || "Failed to confirm booking. Please try again.");

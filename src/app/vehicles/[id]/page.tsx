@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
-import BookingForm from "@/components/vehicles/booking-form";
+import BookingForm from "../../../components/vehicles/booking-form";
 import { cn } from "@/lib/utils";
 
 export default async function VehicleDetailsPage({ params }: { params: Promise<{ id: string }> }) {
