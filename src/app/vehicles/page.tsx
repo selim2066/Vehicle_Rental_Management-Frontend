@@ -6,6 +6,7 @@ import { Filter, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import NoResults from "@/components/vehicles/no-results";
 
 export default async function VehiclesPage({
   searchParams,
@@ -99,18 +100,7 @@ export default async function VehiclesPage({
               )}
             </>
           ) : (
-            <div className="text-center py-32 bg-card rounded-[4rem] border border-dashed border-border/60 max-w-4xl mx-auto">
-              <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center mx-auto mb-8">
-                <Filter className="w-12 h-12 text-muted-foreground" />
-              </div>
-              <h2 className="text-3xl font-bold mb-4 tracking-tight">No vehicles matched your search</h2>
-              <p className="text-muted-foreground text-lg mb-8 max-w-md mx-auto">
-                Try adjusting your filters or search terms to find what you're looking for.
-              </p>
-              <Button size="lg" className="rounded-full px-10 font-bold" asChild>
-                <Link href="/vehicles">Clear all filters</Link>
-              </Button>
-            </div>
+            <NoResults />
           )}
         </div>
       </section>
