@@ -57,8 +57,8 @@ export default function BookingForm({ vehicle }: BookingFormProps) {
       setIsSubmitting(true);
       const response = await bookingService.create({
         vehicle_id: vehicle.id,
-        start_date: startDate,
-        end_date: endDate,
+        rent_start_date: startDate,
+        rent_end_date: endDate,
       }, token);
 
       if (response.success) {

@@ -4,18 +4,18 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/a
 
 export interface CreateBookingPayload {
   vehicle_id: number;
-  start_date: string;
-  end_date: string;
+  rent_start_date: string;
+  rent_end_date: string;
 }
 
 export interface Booking {
   id: number;
   vehicle_id: number;
-  user_id: number;
-  start_date: string;
-  end_date: string;
+  customer_id: number;
+  rent_start_date: string;
+  rent_end_date: string;
   total_price: number;
-  status: 'pending' | 'confirmed' | 'cancelled' | 'completed';
+  status: 'active' | 'returned' | 'cancelled' | 'pending';
   created_at: string;
   vehicle?: any;
 }

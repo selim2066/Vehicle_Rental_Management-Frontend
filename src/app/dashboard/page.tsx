@@ -53,7 +53,7 @@ export default function DashboardPage() {
     );
   }
 
-  const activeBookings = bookings.filter(b => b.status === 'confirmed' || b.status === 'pending');
+  const activeBookings = bookings.filter(b => b.status === 'active' || b.status === 'pending');
   const totalBalance = bookings.reduce((acc, b) => acc + (parseFloat(b.total_price) || 0), 0);
 
   return (
@@ -190,10 +190,10 @@ export default function DashboardPage() {
                           </div>
                           <div>
                             <h4 className="font-bold group-hover:text-primary transition-colors">
-                              {booking.vehicle?.vehicle_name || `Booking #${booking.id}`}
+                              {booking.vehicles?.vehicle_name || `Booking #${booking.id}`}
                             </h4>
                             <p className="text-xs text-muted-foreground">
-                              {new Date(booking.start_date).toLocaleDateString()} - {new Date(booking.end_date).toLocaleDateString()}
+                              {new Date(booking.rent_start_date).toLocaleDateString()} - {new Date(booking.rent_end_date).toLocaleDateString()}
                             </p>
                           </div>
                         </div>
@@ -201,7 +201,8 @@ export default function DashboardPage() {
                           <div className="font-bold">${parseFloat(booking.total_price).toLocaleString()}</div>
                           <div className={cn(
                             "text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full inline-block mt-1 border",
-                            booking.status === 'confirmed' ? "bg-green-500/10 text-green-500 border-green-500/20" :
+                            booking.status === 'active' ? "bg-green-500/10 text-green-500 border-green-500/20" :
+                            booking.status === 'returned' ? "bg-blue-500/10 text-blue-500 border-blue-500/20" :
                             booking.status === 'pending' ? "bg-yellow-500/10 text-yellow-500 border-yellow-500/20" :
                             "bg-muted text-muted-foreground border-border"
                           )}>
