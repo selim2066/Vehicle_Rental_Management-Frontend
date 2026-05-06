@@ -15,23 +15,46 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function DashboardPage() {
-  const { user, logout, isLoading } = useAuth();
+  const { user, token, logout, isLoading } = useAuth();
   const router = useRouter();
+  const [bookings, setBookings] = useState<any[]>([]);
+  const [isDataLoading, setIsDataLoading] = useState(true);
 
   // Redirect if not logged in
   useEffect(() => {
     if (!isLoading && !user) {
       router.push("/signin");
+      return;
     }
-  }, [user, isLoading, router]);
 
-  if (isLoading || !user) {
+    if (user && token) {
+      fetchBookings();
+    }
+  }, [user, isLoading, router, token]);
+
+  const fetchBookings = async () => {
+    try {
+      const response = await bookingService.getMyBookings(token!);
+      if (response.success) {
+        setBookings(response.data);
+      }
+    } catch (error) {
+      console.error("Failed to fetch bookings:", error);
+    } finally {
+      setIsDataLoading(false);
+    }
+  };
+
+  if (isLoading || !user || isDataLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
+
+  const activeBookings = bookings.filter(b => b.status === 'confirmed' || b.status === 'pending');
+  const totalBalance = bookings.reduce((acc, b) => acc + (parseFloat(b.total_price) || 0), 0);
 
   return (
     <main className="min-h-screen bg-muted/30">
@@ -101,10 +124,10 @@ export default function DashboardPage() {
               </motion.div>
 
               {/* Quick Info */}
-              <div className="bg-primary rounded-[2.5rem] p-8 text-white overflow-hidden relative">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2" />
+              <div className="bg-primary dark:bg-muted/10 rounded-[2.5rem] p-8 text-primary-foreground dark:text-foreground overflow-hidden relative border border-primary/10">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 dark:bg-primary/5 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2" />
                 <h3 className="text-xl font-bold mb-2">Need help?</h3>
-                <p className="text-white/70 text-sm mb-6">Our priority support is here for you 24/7 for all your premium rentals.</p>
+                <p className="text-primary-foreground/70 dark:text-muted-foreground text-sm mb-6">Our priority support is here for you 24/7 for all your premium rentals.</p>
                 <Button variant="secondary" className="w-full rounded-2xl font-bold">Contact Support</Button>
               </div>
             </div>
@@ -114,9 +137,9 @@ export default function DashboardPage() {
               {/* Stats Grid */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {[
-                  { label: "Active Rentals", value: "0", icon: Car, color: "text-blue-500", bg: "bg-blue-500/10" },
-                  { label: "Total Bookings", value: "0", icon: Clock, color: "text-primary", bg: "bg-primary/10" },
-                  { label: "Wallet Balance", value: "$0.00", icon: CreditCard, color: "text-green-500", bg: "bg-green-500/10" },
+                  { label: "Active Rentals", value: activeBookings.length.toString(), icon: Car, color: "text-blue-500", bg: "bg-blue-500/10" },
+                  { label: "Total Bookings", value: bookings.length.toString(), icon: Clock, color: "text-primary", bg: "bg-primary/10" },
+                  { label: "Total Spent", value: `$${totalBalance.toLocaleString()}`, icon: CreditCard, color: "text-green-500", bg: "bg-green-500/10" },
                 ].map((stat, i) => (
                   <motion.div
                     key={stat.label}
@@ -154,21 +177,57 @@ export default function DashboardPage() {
                   </Link>
                 </div>
 
-                <div className="flex flex-col items-center justify-center py-20 text-center">
-                  <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center mb-6">
-                    <Car className="w-10 h-10 text-muted-foreground/40" />
+                {bookings.length > 0 ? (
+                  <div className="space-y-4">
+                    {bookings.slice(0, 5).map((booking, i) => (
+                      <div 
+                        key={booking.id}
+                        className="flex items-center justify-between p-4 rounded-2xl bg-muted/30 border border-border/20 hover:border-primary/20 transition-all group"
+                      >
+                        <div className="flex items-center gap-4">
+                          <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+                            <Car className="w-6 h-6" />
+                          </div>
+                          <div>
+                            <h4 className="font-bold group-hover:text-primary transition-colors">
+                              {booking.vehicle?.vehicle_name || `Booking #${booking.id}`}
+                            </h4>
+                            <p className="text-xs text-muted-foreground">
+                              {new Date(booking.start_date).toLocaleDateString()} - {new Date(booking.end_date).toLocaleDateString()}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="font-bold">${parseFloat(booking.total_price).toLocaleString()}</div>
+                          <div className={cn(
+                            "text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full inline-block mt-1 border",
+                            booking.status === 'confirmed' ? "bg-green-500/10 text-green-500 border-green-500/20" :
+                            booking.status === 'pending' ? "bg-yellow-500/10 text-yellow-500 border-yellow-500/20" :
+                            "bg-muted text-muted-foreground border-border"
+                          )}>
+                            {booking.status}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <h4 className="text-xl font-bold mb-2">No bookings yet</h4>
-                  <p className="text-muted-foreground max-w-xs mx-auto mb-8">
-                    Your luxury travel history is currently empty. Explore our fleet and start your adventure.
-                  </p>
-                  <Link 
-                    href="/vehicles" 
-                    className={cn(buttonVariants({}), "rounded-full px-8 h-12")}
-                  >
-                    Explore Fleet
-                  </Link>
-                </div>
+                ) : (
+                  <div className="flex flex-col items-center justify-center py-20 text-center">
+                    <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center mb-6">
+                      <Car className="w-10 h-10 text-muted-foreground/40" />
+                    </div>
+                    <h4 className="text-xl font-bold mb-2">No bookings yet</h4>
+                    <p className="text-muted-foreground max-w-xs mx-auto mb-8">
+                      Your luxury travel history is currently empty. Explore our fleet and start your adventure.
+                    </p>
+                    <Link 
+                      href="/vehicles" 
+                      className={cn(buttonVariants({}), "rounded-full px-8 h-12")}
+                    >
+                      Explore Fleet
+                    </Link>
+                  </div>
+                )}
               </motion.div>
             </div>
           </div>

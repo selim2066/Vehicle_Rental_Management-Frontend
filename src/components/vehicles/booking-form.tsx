@@ -8,17 +8,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/components/providers/auth-provider";
 import { toast } from "sonner";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { bookingService } from "@/services/booking.service";
 
 interface BookingFormProps {
   vehicle: Vehicle;
 }
 
 export default function BookingForm({ vehicle }: BookingFormProps) {
-  const { user } = useAuth();
+  const { user, token } = useAuth();
+  const router = useRouter();
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [totalDays, setTotalDays] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (startDate && endDate) {
@@ -37,19 +41,37 @@ export default function BookingForm({ vehicle }: BookingFormProps) {
     }
   }, [startDate, endDate, vehicle.daily_rent_price]);
 
-  const handleBooking = (e: React.FormEvent) => {
+  const handleBooking = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user) {
+    if (!user || !token) {
       toast.error("Please sign in to book a vehicle");
+      router.push("/signin");
       return;
     }
     if (!startDate || !endDate) {
       toast.error("Please select both start and end dates");
       return;
     }
-    
-    toast.success("Booking initiated! Redirecting to checkout...");
-    // TODO: Implement actual booking logic
+
+    try {
+      setIsSubmitting(true);
+      const response = await bookingService.create({
+        vehicle_id: vehicle.id,
+        start_date: startDate,
+        end_date: endDate,
+      }, token);
+
+      if (response.success) {
+        toast.success("Booking confirmed! Redirecting to your dashboard...");
+        setTimeout(() => {
+          router.push("/dashboard");
+        }, 2000);
+      }
+    } catch (error: any) {
+      toast.error(error.message || "Failed to confirm booking. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -130,9 +152,22 @@ export default function BookingForm({ vehicle }: BookingFormProps) {
         </AnimatePresence>
 
         {user ? (
-          <Button type="submit" className="w-full h-16 rounded-2xl text-lg font-bold group mt-4">
-            Confirm Booking
-            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          <Button 
+            type="submit" 
+            disabled={isSubmitting}
+            className="w-full h-16 rounded-2xl text-lg font-bold group mt-4"
+          >
+            {isSubmitting ? (
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                Processing...
+              </div>
+            ) : (
+              <>
+                Confirm Booking
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </>
+            )}
           </Button>
         ) : (
           <Button type="button" variant="secondary" className="w-full h-16 rounded-2xl text-lg font-bold group mt-4" asChild>

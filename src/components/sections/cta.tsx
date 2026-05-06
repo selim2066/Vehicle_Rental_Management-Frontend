@@ -14,24 +14,24 @@ export default function CTA() {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          className="relative bg-primary rounded-[3rem] p-12 md:p-24 overflow-hidden text-center"
+          className="relative bg-primary dark:bg-muted/10 rounded-[3rem] p-12 md:p-24 overflow-hidden text-center border border-primary/10"
         >
           {/* Background Decor */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 blur-[80px] rounded-full -translate-x-1/2 translate-y-1/2" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 dark:bg-primary/5 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 dark:bg-white/5 blur-[80px] rounded-full -translate-x-1/2 translate-y-1/2" />
           
           <div className="relative z-10 flex flex-col items-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/10 text-white text-xs font-bold uppercase tracking-widest mb-8">
-              <Star className="w-4 h-4 fill-white" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 dark:bg-primary/20 backdrop-blur-md border border-white/10 dark:border-primary/10 text-white dark:text-primary text-xs font-bold uppercase tracking-widest mb-8">
+              <Star className="w-4 h-4 fill-white dark:fill-primary" />
               Limited Time Offer
             </div>
             
-            <h2 className="text-4xl md:text-7xl font-heading font-bold text-white leading-[1.1] mb-8 tracking-tighter">
+            <h2 className="text-4xl md:text-7xl font-heading font-bold text-white dark:text-foreground leading-[1.1] mb-8 tracking-tighter">
               Ready to hit the <br />
               <span className="italic">open road?</span>
             </h2>
             
-            <p className="text-white/80 max-w-xl mx-auto text-lg md:text-xl mb-12 font-medium">
+            <p className="text-white/80 dark:text-muted-foreground max-w-xl mx-auto text-lg md:text-xl mb-12 font-medium">
               Join thousands of satisfied customers who have experienced the thrill of driving our premium vehicles. Your next adventure starts here.
             </p>
             
@@ -43,9 +43,12 @@ export default function CTA() {
                 Get Started for Free
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Button size="lg" className="rounded-full px-10 h-16 text-lg font-bold bg-white/10 hover:bg-white/20 border border-white/10 backdrop-blur-md text-white">
+              <Link 
+                href="/vehicles" 
+                className={cn(buttonVariants({ variant: "outline", size: "lg" }), "rounded-full px-10 h-16 text-lg font-bold bg-white/10 hover:bg-white/20 border border-white/10 backdrop-blur-md text-white dark:text-foreground dark:border-primary/10")}
+              >
                 View All Vehicles
-              </Button>
+              </Link>
             </div>
           </div>
         </motion.div>

@@ -3,17 +3,35 @@ import Navbar from "@/components/layout/navbar";
 import VehicleCard from "@/components/vehicles/vehicle-card";
 import { Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-export default async function VehiclesPage() {
+export default async function VehiclesPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string>>;
+}) {
+  const params = await searchParams;
+  const currentCategory = params.type || "all";
+  
   let vehicles: any[] = [];
   try {
-    const response = await vehicleService.getAll();
+    const response = await vehicleService.getAll(params);
     if (response && response.success && Array.isArray(response.data)) {
       vehicles = response.data;
     }
   } catch (error) {
     console.error("Failed to fetch vehicles:", error);
   }
+
+  const categories = [
+    { name: "All", value: "all" },
+    { name: "Luxury", value: "luxury" },
+    { name: "SUV", value: "SUV" },
+    { name: "Sedan", value: "sedan" },
+    { name: "Sports", value: "sports" },
+    { name: "Electric", value: "electric" },
+  ];
 
   return (
     <main className="min-h-screen pt-24">
@@ -30,15 +48,29 @@ export default async function VehiclesPage() {
               </p>
             </div>
             <div className="flex gap-3">
-              <Button variant="outline" className="rounded-full px-6 gap-2 border-border/40 hover:bg-primary/5">
-                <Filter className="w-4 h-4" />
-                Filter
-              </Button>
               <div className="text-sm font-semibold flex items-center gap-2 bg-background border border-border/40 px-4 py-2 rounded-full shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                 {vehicles.length} Vehicles Available
               </div>
             </div>
+          </div>
+
+          {/* Categories Filter Bar */}
+          <div className="flex items-center gap-3 mt-12 overflow-x-auto pb-4 no-scrollbar">
+            {categories.map((cat) => (
+              <Link
+                key={cat.value}
+                href={cat.value === "all" ? "/vehicles" : `/vehicles?type=${cat.value}`}
+                className={cn(
+                  "px-6 py-2.5 rounded-full text-sm font-bold transition-all whitespace-nowrap border",
+                  currentCategory === cat.value
+                    ? "bg-primary text-primary-foreground border-primary"
+                    : "bg-background text-foreground/60 border-border/40 hover:border-primary/40 hover:text-primary"
+                )}
+              >
+                {cat.name}
+              </Link>
+            ))}
           </div>
         </div>
       </section>
@@ -59,6 +91,9 @@ export default async function VehiclesPage() {
               </div>
               <h2 className="text-2xl font-bold mb-2">No vehicles found</h2>
               <p className="text-muted-foreground">Try adjusting your filters or check back later.</p>
+              <Button variant="link" asChild className="mt-4">
+                <Link href="/vehicles">Clear all filters</Link>
+              </Button>
             </div>
           )}
         </div>
