@@ -72,9 +72,11 @@ export default function FleetManagementPage() {
           <p className="text-muted-foreground mt-1">Manage your vehicle inventory and availability</p>
         </div>
         <div className="flex gap-4">
-          <Button className="rounded-2xl gap-2 h-14 px-8 font-bold shadow-lg shadow-primary/20">
-            <Plus className="w-5 h-5" />
-            Add New Vehicle
+          <Button className="rounded-2xl gap-2 h-14 px-8 font-bold shadow-lg shadow-primary/20" asChild>
+            <Link href="/dashboard/vehicles/add">
+              <Plus className="w-5 h-5" />
+              Add New Vehicle
+            </Link>
           </Button>
         </div>
       </div>
