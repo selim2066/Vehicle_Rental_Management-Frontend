@@ -44,4 +44,22 @@ export const userService = {
 
     return res.json();
   },
+
+  updateMe: async (token: string, data: any): Promise<ApiResponse<User>> => {
+    const res = await fetch(`${API_BASE_URL}/users/me`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.message || "Failed to update profile");
+    }
+
+    return res.json();
+  },
 };

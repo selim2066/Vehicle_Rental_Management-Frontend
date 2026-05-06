@@ -4,34 +4,74 @@ import { useAuth } from "@/components/providers/auth-provider";
 import { 
   User as UserIcon, Mail, Phone, 
   MapPin, Camera, Save, Shield,
-  Key, Bell, CheckCircle2
+  Key, Bell, CheckCircle2, Image as ImageIcon
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { toast } from "sonner"; // I'll check if sonner is available
+import { toast } from "sonner";
+import { userService } from "@/services/user.service";
 
 export default function ProfilePage() {
-  const { user } = useAuth();
+  const { user, token, refreshUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  
   const [formData, setFormData] = useState({
-    name: user?.name || "",
-    email: user?.email || "",
-    phone: user?.phone || "",
-    address: "123 Premium Lane, Dhaka",
-    role: user?.role || "customer"
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    avatar: "",
+    role: "customer"
   });
+
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        name: user.name || "",
+        email: user.email || "",
+        phone: user.phone || "",
+        address: user.address || "123 Premium Lane, Dhaka",
+        avatar: user.avatar || `https://i.pravatar.cc/150?u=${user.email}`,
+        role: user.role || "customer"
+      });
+    }
+  }, [user]);
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!token) return;
+
     setIsLoading(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setIsLoading(false);
-    toast.success("Profile updated successfully!");
+    try {
+      const response = await userService.updateMe(token, {
+        name: formData.name,
+        phone: formData.phone,
+        address: formData.address,
+        avatar: formData.avatar,
+      });
+
+      if (response.success) {
+        await refreshUser();
+        toast.success("Profile updated successfully!");
+      }
+    } catch (error: any) {
+      toast.error(error.message || "Failed to update profile");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleImageClick = () => {
+    // For now, we'll just allow entering a URL since backend doesn't have upload middleware
+    const newUrl = prompt("Enter new avatar URL:", formData.avatar);
+    if (newUrl) {
+      setFormData({ ...formData, avatar: newUrl });
+    }
   };
 
   return (
@@ -54,19 +94,23 @@ export default function ProfilePage() {
             
             <div className="relative mt-8">
               <Avatar className="w-32 h-32 border-4 border-background shadow-2xl">
-                <AvatarImage src={`https://i.pravatar.cc/150?u=${user?.email}`} />
+                <AvatarImage src={formData.avatar} />
                 <AvatarFallback className="text-4xl font-bold bg-primary/10 text-primary">
-                  {user?.name?.charAt(0)}
+                  {formData.name?.charAt(0)}
                 </AvatarFallback>
               </Avatar>
-              <button className="absolute bottom-0 right-0 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center border-4 border-background shadow-lg hover:scale-110 transition-transform">
+              <button 
+                type="button"
+                onClick={handleImageClick}
+                className="absolute bottom-0 right-0 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center border-4 border-background shadow-lg hover:scale-110 transition-transform"
+              >
                 <Camera className="w-5 h-5" />
               </button>
             </div>
 
             <div className="mt-6 space-y-1">
-              <h3 className="text-2xl font-bold">{user?.name}</h3>
-              <p className="text-sm text-muted-foreground font-medium">{user?.email}</p>
+              <h3 className="text-2xl font-bold">{formData.name}</h3>
+              <p className="text-sm text-muted-foreground font-medium">{formData.email}</p>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest mt-4">
                 <Shield className="w-3 h-3" />
                 Verified Account
@@ -119,18 +163,19 @@ export default function ProfilePage() {
                         value={formData.name}
                         onChange={(e) => setFormData({...formData, name: e.target.value})}
                         className="h-14 pl-12 rounded-2xl bg-muted/30 border-border/40 focus:ring-primary/20"
+                        placeholder="Your full name"
                       />
                     </div>
                   </div>
                   <div className="space-y-3">
                     <Label htmlFor="email" className="text-sm font-bold text-muted-foreground uppercase tracking-wider ml-1">Email Address</Label>
                     <div className="relative group">
-                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
+                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                       <Input 
                         id="email"
                         value={formData.email}
                         readOnly
-                        className="h-14 pl-12 rounded-2xl bg-muted/10 border-border/40 text-muted-foreground"
+                        className="h-14 pl-12 rounded-2xl bg-muted/10 border-border/40 text-muted-foreground cursor-not-allowed"
                       />
                     </div>
                   </div>
@@ -143,6 +188,7 @@ export default function ProfilePage() {
                         value={formData.phone}
                         onChange={(e) => setFormData({...formData, phone: e.target.value})}
                         className="h-14 pl-12 rounded-2xl bg-muted/30 border-border/40 focus:ring-primary/20"
+                        placeholder="Your phone number"
                       />
                     </div>
                   </div>
@@ -155,6 +201,20 @@ export default function ProfilePage() {
                         value={formData.address}
                         onChange={(e) => setFormData({...formData, address: e.target.value})}
                         className="h-14 pl-12 rounded-2xl bg-muted/30 border-border/40 focus:ring-primary/20"
+                        placeholder="Your address"
+                      />
+                    </div>
+                  </div>
+                  <div className="md:col-span-2 space-y-3">
+                    <Label htmlFor="avatar" className="text-sm font-bold text-muted-foreground uppercase tracking-wider ml-1">Avatar URL</Label>
+                    <div className="relative group">
+                      <ImageIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
+                      <Input 
+                        id="avatar"
+                        value={formData.avatar}
+                        onChange={(e) => setFormData({...formData, avatar: e.target.value})}
+                        className="h-14 pl-12 rounded-2xl bg-muted/30 border-border/40 focus:ring-primary/20"
+                        placeholder="Image URL (e.g. https://...)"
                       />
                     </div>
                   </div>
