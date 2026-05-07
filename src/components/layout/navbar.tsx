@@ -26,12 +26,14 @@ const publicLinks = [
   { name: "Fleet", href: "/vehicles" },
   { name: "Deals", href: "/deals" },
   { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
 ];
 
 const authLinks = [
   { name: "Home", href: "/" },
   { name: "Fleet", href: "/vehicles" },
   { name: "Deals", href: "/deals" },
+  { name: "Contact", href: "/contact" },
   { name: "My Bookings", href: "/bookings" },
 ];
 
