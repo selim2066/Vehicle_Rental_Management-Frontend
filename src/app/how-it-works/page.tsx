@@ -1,91 +1,67 @@
+"use client";
+
 import Navbar from "@/components/layout/navbar";
-import { Search, Calendar, Car, Key, ArrowRight } from "lucide-react";
+import Footer from "@/components/layout/footer";
+import HowItWorks from "@/components/home/how-it-works";
+import { motion } from "framer-motion";
+import { ChevronRight, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 
 export default function HowItWorksPage() {
-  const steps = [
-    {
-      title: "Find Your Match",
-      desc: "Browse our extensive collection of premium vehicles and choose the one that fits your style and needs.",
-      icon: Search,
-      color: "text-blue-500",
-      bg: "bg-blue-500/10"
-    },
-    {
-      title: "Pick Your Dates",
-      desc: "Select your pick-up and drop-off dates. Our flexible booking system lets you rent by the day or week.",
-      icon: Calendar,
-      color: "text-primary",
-      bg: "bg-primary/10"
-    },
-    {
-      title: "Easy Booking",
-      desc: "Confirm your reservation with our secure checkout. No hidden fees, just simple, transparent pricing.",
-      icon: Car,
-      color: "text-purple-500",
-      bg: "bg-purple-500/10"
-    },
-    {
-      title: "Hit the Road",
-      desc: "Collect your keys and start your journey. Our 24/7 support is always here if you need anything.",
-      icon: Key,
-      color: "text-green-500",
-      bg: "bg-green-500/10"
-    }
-  ];
-
   return (
-    <main className="min-h-screen pt-24 bg-background">
+    <main className="min-h-screen bg-background">
       <Navbar />
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-24">
-            <h1 className="text-5xl md:text-7xl font-heading font-bold mb-6">Simple <span className="text-primary italic">Process.</span></h1>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-              We've redesigned the car rental experience from the ground up to be as smooth as the drive itself.
-            </p>
-          </div>
 
-          <div className="relative">
-            {/* Connection Line */}
-            <div className="absolute top-1/2 left-0 w-full h-0.5 bg-border/40 -translate-y-1/2 hidden lg:block" />
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-              {steps.map((step, i) => (
-                <div key={step.title} className="relative z-10 flex flex-col items-center text-center">
-                  <div className={cn("w-20 h-20 rounded-3xl flex items-center justify-center mb-8 shadow-xl transition-transform hover:scale-110 duration-300", step.bg)}>
-                    <step.icon className={cn("w-10 h-10", step.color)} />
-                  </div>
-                  <div className="w-8 h-8 rounded-full bg-background border-4 border-primary flex items-center justify-center text-xs font-bold mb-6 lg:absolute lg:top-1/2 lg:-translate-y-1/2">
-                    {i + 1}
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4 mt-4 lg:mt-12">{step.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {step.desc}
-                  </p>
-                </div>
-              ))}
+      {/* Hero / Intro section for the page */}
+      <section className="pt-40 pb-20 px-6 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(var(--primary-rgb),0.1),transparent_50%)]" />
+        <div className="max-w-7xl mx-auto text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex flex-col items-center gap-6"
+          >
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold">
+              <span>Quick Guide</span>
+              <ChevronRight className="w-4 h-4" />
             </div>
-          </div>
+            <h1 className="text-5xl md:text-7xl font-heading font-bold tracking-tight max-w-4xl">
+              Seamless Rentals, <span className="text-primary">Exceptional</span> Journeys
+            </h1>
+            <p className="text-foreground/60 text-lg md:text-xl max-w-2xl">
+              Discover how easy it is to rent your dream car with Vroom. We've streamlined the process so you can spend less time booking and more time driving.
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
-          <div className="mt-32 relative rounded-[4rem] overflow-hidden aspect-[21/9] flex items-center justify-center group">
-            <img 
-              src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=1200&auto=format&fit=crop" 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" 
-              alt="Luxury Car"
-            />
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
-            <div className="relative z-10 text-center text-white px-6">
-              <h2 className="text-4xl md:text-6xl font-heading font-bold mb-8">Ready to start your journey?</h2>
-              <Link href="/vehicles" className={cn(buttonVariants({ size: "lg" }), "rounded-full px-12 h-16 text-lg font-bold")}>
-                Browse the Fleet
-              </Link>
+      <HowItWorks />
+
+      {/* CTA Section */}
+      <section className="py-32 px-6">
+        <div className="max-w-5xl mx-auto rounded-[3rem] bg-primary p-12 md:p-20 text-center relative overflow-hidden shadow-2xl shadow-primary/20">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2" />
+          <div className="relative z-10 space-y-8">
+            <h2 className="text-4xl md:text-5xl font-heading font-bold text-primary-foreground">Ready to start your journey?</h2>
+            <p className="text-primary-foreground/80 text-lg md:text-xl max-w-2xl mx-auto">
+              Choose from our curated fleet of premium vehicles and experience luxury like never before.
+            </p>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-6">
+              <Button size="lg" variant="secondary" className="h-16 px-10 rounded-2xl text-lg font-bold w-full md:w-auto group" asChild>
+                <Link href="/vehicles">
+                  Browse Fleet
+                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" className="h-16 px-10 rounded-2xl text-lg font-bold w-full md:w-auto bg-transparent border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground hover:text-primary transition-all" asChild>
+                <Link href="/contact">Contact Support</Link>
+              </Button>
             </div>
           </div>
         </div>
       </section>
+
     </main>
   );
 }

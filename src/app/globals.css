@@ -129,6 +129,7 @@
   --sidebar-accent-foreground: oklch(0.55 0.22 260);
   --sidebar-border: oklch(0.92 0.01 240);
   --sidebar-ring: oklch(0.55 0.22 260);
+  --primary-rgb: 104, 117, 245;
 }
 
 .dark {
@@ -164,6 +165,7 @@
   --sidebar-accent-foreground: oklch(0.98 0.01 260);
   --sidebar-border: oklch(0.22 0.02 260);
   --sidebar-ring: oklch(0.65 0.18 260);
+  --primary-rgb: 129, 140, 248;
 }
 
 
