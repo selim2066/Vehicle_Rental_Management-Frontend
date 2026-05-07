@@ -6,24 +6,24 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const testimonials = [
   {
-    name: "Sarah Johnson",
+    name: "Ahmed Al-Sayed",
     role: "Business Executive",
     content: "The premium service and vehicle quality were outstanding. Vroom made my business trip across Dhaka seamless and stylish.",
-    image: "https://i.pravatar.cc/150?u=sarah",
+    image: "/images/client-1.png",
     rating: 5,
   },
   {
-    name: "David Chen",
-    role: "Travel Blogger",
-    content: "Absolute best rental experience I've had. The booking process is incredibly smooth, and the cars are in pristine condition.",
-    image: "https://i.pravatar.cc/150?u=david",
-    rating: 5,
-  },
-  {
-    name: "Michael Ross",
+    name: "Omar Farooq",
     role: "Tech Entrepreneur",
+    content: "Absolute best rental experience I've had. The booking process is incredibly smooth, and the cars are in pristine condition.",
+    image: "/images/client-2.png",
+    rating: 5,
+  },
+  {
+    name: "Zaid Al-Mansour",
+    role: "Luxury Traveler",
     content: "Highly recommend the luxury SUV fleet. Perfect for group trips with all the modern amenities you could ask for.",
-    image: "https://i.pravatar.cc/150?u=michael",
+    image: "/images/client-3.png",
     rating: 5,
   },
 ];
@@ -47,9 +47,13 @@ export default function Testimonials() {
               key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
+              whileHover={{ y: -10 }}
+              transition={{ 
+                y: { type: "spring", stiffness: 300, damping: 20 },
+                default: { delay: i * 0.1 } 
+              }}
               viewport={{ once: false }}
-              className="p-10 rounded-[3rem] bg-card border border-border/40 relative group hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500"
+              className="p-10 rounded-[3rem] bg-card border border-border/40 relative group hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500"
             >
               <Quote className="absolute top-8 right-8 w-12 h-12 text-primary/10 transition-transform duration-500 group-hover:scale-110" />
               <div className="flex gap-1 mb-6">

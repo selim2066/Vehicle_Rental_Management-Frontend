@@ -23,12 +23,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
 import Link from "next/link";
+import { ConfirmationModal } from "@/components/ui/confirmation-modal";
 
 export default function FleetManagementPage() {
   const { user } = useAuth();
   const [vehicles, setVehicles] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [deleteId, setDeleteId] = useState<number | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     fetchVehicles();
@@ -50,16 +53,21 @@ export default function FleetManagementPage() {
     v.brand.toLowerCase().includes(search.toLowerCase())
   );
 
-  const handleDelete = async (id: number) => {
-    if (!confirm("Are you sure you want to delete this vehicle? This action cannot be undone.")) return;
+  const handleDelete = async () => {
+    if (deleteId === null) return;
+    
+    setIsDeleting(true);
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
-      await vehicleService.delete(id, token);
+      await vehicleService.delete(deleteId, token);
       toast.success("Vehicle deleted successfully");
+      setDeleteId(null);
       fetchVehicles();
     } catch (error: any) {
       toast.error(error.message || "Failed to delete vehicle");
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -195,7 +203,7 @@ export default function FleetManagementPage() {
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem 
-                            onClick={() => handleDelete(vehicle.id)}
+                            onClick={() => setDeleteId(vehicle.id)}
                             className="rounded-xl font-bold py-3 cursor-pointer gap-2 text-rose-500 hover:bg-rose-500/10"
                           >
                             <Trash2 className="w-4 h-4" /> Delete Vehicle
@@ -210,6 +218,16 @@ export default function FleetManagementPage() {
           </div>
         )}
       </div>
+
+      <ConfirmationModal 
+        isOpen={deleteId !== null}
+        onClose={() => setDeleteId(null)}
+        onConfirm={handleDelete}
+        title="Delete Vehicle?"
+        description="Are you sure you want to delete this vehicle? This action will permanently remove it from the fleet and cannot be undone."
+        confirmText="Yes, Delete"
+        isLoading={isDeleting}
+      />
     </div>
   );
 }

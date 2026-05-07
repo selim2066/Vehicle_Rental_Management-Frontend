@@ -13,6 +13,10 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { bookingService, Booking } from "@/services/booking.service";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
+import Image from "next/image";
+import { ConfirmationModal } from "@/components/ui/confirmation-modal";
+import { LoadingState } from "@/components/ui/loading-state";
 
 export default function BookingsPage() {
   const { user, token, isLoading } = useAuth();
@@ -20,6 +24,8 @@ export default function BookingsPage() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [isDataLoading, setIsDataLoading] = useState(true);
   const [filter, setFilter] = useState("all");
+  const [cancelId, setCancelId] = useState<number | null>(null);
+  const [isCancelling, setIsCancelling] = useState(false);
 
   useEffect(() => {
     if (!isLoading && !user) {
@@ -50,14 +56,36 @@ export default function BookingsPage() {
     }
   };
 
+  const handleCancel = async () => {
+    if (cancelId === null) return;
+    
+    setIsCancelling(true);
+    try {
+      const storedToken = localStorage.getItem("token") || token;
+      if (!storedToken) return;
+
+      await bookingService.cancel(cancelId, storedToken);
+      toast.success("Booking cancelled successfully");
+      fetchBookings(); // Refresh list
+      setCancelId(null);
+    } catch (error: any) {
+      toast.error(error.message || "Failed to cancel booking");
+    } finally {
+      setIsCancelling(false);
+    }
+  };
+
   const filteredBookings = bookings.filter(b => 
     filter === "all" ? true : b.status === filter
   );
 
   if (isLoading || isDataLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen">
+        <Navbar />
+        <div className="max-w-5xl mx-auto px-6 pt-32 pb-20">
+          <LoadingState title="Loading Bookings" subtitle="Fetching your luxury rental history..." />
+        </div>
       </div>
     );
   }
@@ -109,13 +137,22 @@ export default function BookingsPage() {
                 transition={{ delay: i * 0.05 }}
                 className="bg-card border border-border/40 rounded-[2.5rem] p-8 flex flex-col md:flex-row items-center gap-8 hover:border-primary/40 transition-all group"
               >
-                <div className="w-24 h-24 bg-primary/10 rounded-3xl flex items-center justify-center text-primary shrink-0 group-hover:scale-110 transition-transform">
-                  <Car className="w-10 h-10" />
+                <div className="w-24 h-24 bg-primary/10 rounded-3xl overflow-hidden flex items-center justify-center text-primary shrink-0 group-hover:scale-110 transition-transform relative">
+                  {booking.vehicles?.vehicle_images?.[0]?.image_url ? (
+                    <Image 
+                      src={booking.vehicles.vehicle_images[0].image_url} 
+                      alt={booking.vehicles.vehicle_name}
+                      fill
+                      className="object-cover"
+                    />
+                  ) : (
+                    <Car className="w-10 h-10" />
+                  )}
                 </div>
                 
                 <div className="flex-1 text-center md:text-left">
                   <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
-                    <h3 className="text-xl font-bold">{booking.vehicle?.vehicle_name || `Booking #${booking.id}`}</h3>
+                    <h3 className="text-xl font-bold">{booking.vehicles?.vehicle_name || `Booking #${booking.id}`}</h3>
                     <span className={cn(
                       "px-3 py-1 rounded-full text-[10px] font-bold uppercase border",
                       booking.status === 'active' ? "bg-green-500/10 text-green-500 border-green-500/20" :
@@ -137,12 +174,23 @@ export default function BookingsPage() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 w-full md:w-auto">
-                  <Button variant="outline" className="flex-1 md:flex-none rounded-2xl font-bold">View Details</Button>
-                  {booking.status === 'active' && (
-                    <Button variant="secondary" className="flex-1 md:flex-none rounded-2xl font-bold text-red-500">Cancel</Button>
-                  )}
-                </div>
+                  <div className="flex items-center gap-3 w-full md:w-auto">
+                    <Link 
+                      href={`/bookings/${booking.id}`}
+                      className={cn(buttonVariants({ variant: "outline" }), "flex-1 md:flex-none rounded-2xl font-bold")}
+                    >
+                      View Details
+                    </Link>
+                    {booking.status === 'active' && (
+                      <Button 
+                        variant="secondary" 
+                        onClick={() => setCancelId(booking.id)}
+                        className="flex-1 md:flex-none rounded-2xl font-bold text-red-500"
+                      >
+                        Cancel
+                      </Button>
+                    )}
+                  </div>
               </motion.div>
             ))
           ) : (
@@ -159,6 +207,16 @@ export default function BookingsPage() {
           )}
         </div>
       </div>
+
+      <ConfirmationModal 
+        isOpen={cancelId !== null}
+        onClose={() => setCancelId(null)}
+        onConfirm={handleCancel}
+        title="Cancel Booking?"
+        description="Are you sure you want to cancel this booking? This action cannot be undone."
+        confirmText="Yes, Cancel"
+        isLoading={isCancelling}
+      />
     </main>
   );
 }

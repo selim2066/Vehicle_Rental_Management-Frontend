@@ -17,13 +17,18 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/providers/auth-provider";
 
-export default function DashboardSidebar() {
+interface SidebarProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+export default function DashboardSidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const { user, logout } = useAuth();
   
   const userLinks = [
     { name: "Overview", href: "/dashboard", icon: LayoutDashboard },
-    { name: "My Bookings", href: "/dashboard/bookings", icon: Calendar },
+    { name: "My Bookings", href: "/bookings", icon: Calendar },
     { name: "My Profile", href: "/dashboard/profile", icon: UserIcon },
   ];
 
@@ -39,7 +44,11 @@ export default function DashboardSidebar() {
   const links = user?.role === "admin" ? adminLinks : userLinks;
 
   return (
-    <aside className="w-80 h-screen sticky top-0 bg-card border-r border-border/40 p-8 flex flex-col hidden lg:flex">
+    <aside className={cn(
+      "w-80 h-screen sticky top-0 bg-card border-r border-border/40 p-8 flex flex-col transition-transform duration-300 z-50",
+      "fixed lg:sticky lg:translate-x-0",
+      isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+    )}>
       {/* Brand */}
       <Link href="/" className="flex items-center gap-2 group mb-12">
         <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform duration-300">

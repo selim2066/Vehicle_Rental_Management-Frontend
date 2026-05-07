@@ -17,7 +17,11 @@ export interface Booking {
   total_price: number;
   status: 'active' | 'returned' | 'cancelled' | 'pending';
   created_at: string;
-  vehicle?: any;
+  vehicles?: {
+    vehicle_name: string;
+    registration_number: string;
+    vehicle_images: { image_url: string }[];
+  };
   user?: any;
 }
 
@@ -54,9 +58,25 @@ export const bookingService = {
     return res.json();
   },
 
+  getById: async (id: string, token: string): Promise<ApiResponse<Booking>> => {
+    const res = await fetch(`${API_BASE_URL}/bookings/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch booking details");
+    }
+
+    return res.json();
+  },
+
   updateStatus: async (id: number, status: string, token: string): Promise<ApiResponse<Booking>> => {
-    const res = await fetch(`${API_BASE_URL}/bookings/${id}/status`, {
-      method: "PATCH",
+    // Note: The current backend PUT /bookings/:id endpoint determines status based on role
+    // and doesn't explicitly use the status sent in the body.
+    const res = await fetch(`${API_BASE_URL}/bookings/${id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -67,6 +87,22 @@ export const bookingService = {
     if (!res.ok) {
       const error = await res.json();
       throw new Error(error.message || "Failed to update booking status");
+    }
+
+    return res.json();
+  },
+
+  cancel: async (id: number, token: string): Promise<ApiResponse<Booking>> => {
+    const res = await fetch(`${API_BASE_URL}/bookings/${id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.message || "Failed to cancel booking");
     }
 
     return res.json();

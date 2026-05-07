@@ -43,7 +43,7 @@ export default function VehicleFilters() {
   const categories = [
     { name: "All Types", value: "all" },
     { name: "Luxury", value: "luxury" },
-    { name: "SUV", value: "SUV" },
+    { name: "SUV", value: "suv" },
     { name: "Sedan", value: "sedan" },
     { name: "Sports", value: "sports" },
     { name: "Electric", value: "electric" },

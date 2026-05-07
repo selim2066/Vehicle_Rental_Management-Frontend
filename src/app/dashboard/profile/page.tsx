@@ -14,6 +14,7 @@ import { useState, useEffect, useRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { toast } from "sonner";
 import { userService } from "@/services/user.service";
+import { LoadingState } from "@/components/ui/loading-state";
 
 export default function ProfilePage() {
   const { user, token, refreshUser } = useAuth();
@@ -74,6 +75,10 @@ export default function ProfilePage() {
     }
   };
 
+  if (!user) {
+    return <LoadingState title="Loading Profile" subtitle="Fetching your account details..." />;
+  }
+
   return (
     <div className="space-y-12">
       {/* Header */}
@@ -88,7 +93,7 @@ export default function ProfilePage() {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-card border border-border/40 rounded-[3rem] p-10 flex flex-col items-center text-center relative overflow-hidden"
+            className="bg-card border border-border/40 rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 flex flex-col items-center text-center relative overflow-hidden"
           >
             <div className="absolute top-0 left-0 w-full h-24 bg-primary/10" />
             
@@ -129,7 +134,7 @@ export default function ProfilePage() {
             </div>
           </motion.div>
 
-          <div className="bg-primary rounded-[3rem] p-10 text-primary-foreground relative overflow-hidden shadow-xl shadow-primary/20">
+          <div className="bg-primary rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 text-primary-foreground relative overflow-hidden shadow-xl shadow-primary/20">
             <div className="absolute bottom-0 right-0 w-32 h-32 bg-white/10 blur-3xl rounded-full translate-x-1/3 translate-y-1/3" />
             <div className="space-y-4 relative z-10">
               <Key className="w-10 h-10 mb-4" />
@@ -148,7 +153,7 @@ export default function ProfilePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-card border border-border/40 rounded-[3rem] p-10 lg:p-12"
+            className="bg-card border border-border/40 rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-12"
           >
             <form onSubmit={handleSave} className="space-y-10">
               <div className="space-y-6">
@@ -225,17 +230,17 @@ export default function ProfilePage() {
                 <h3 className="text-2xl font-bold tracking-tight">Notification Preferences</h3>
                 <div className="space-y-4">
                   {[
-                    { label: "Email Notifications", desc: "Receive booking confirmations and updates via email" },
-                    { label: "SMS Alerts", desc: "Get real-time trip alerts and driver information" },
-                    { label: "Marketing Offers", desc: "Stay updated on new fleet additions and promotions" }
+                    { label: "Email Notifications", desc: "Receive booking confirmations and updates" },
+                    { label: "SMS Alerts", desc: "Get real-time trip alerts and driver info" },
+                    { label: "Marketing Offers", desc: "Stay updated on new fleet additions" }
                   ].map((item, i) => (
-                    <div key={i} className="flex items-center justify-between p-6 rounded-[2rem] bg-muted/30 border border-border/10">
-                      <div className="space-y-1">
-                        <p className="font-bold">{item.label}</p>
-                        <p className="text-sm text-muted-foreground">{item.desc}</p>
+                    <div key={i} className="flex items-center justify-between p-4 md:p-6 rounded-[1.5rem] md:rounded-[2rem] bg-muted/30 border border-border/10">
+                      <div className="space-y-1 pr-4">
+                        <p className="font-bold text-sm md:text-base">{item.label}</p>
+                        <p className="text-xs md:text-sm text-muted-foreground">{item.desc}</p>
                       </div>
-                      <div className="w-12 h-6 bg-primary rounded-full relative cursor-pointer shadow-inner">
-                        <div className="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-md" />
+                      <div className="w-10 h-5 md:w-12 md:h-6 bg-primary rounded-full relative cursor-pointer shadow-inner flex-shrink-0">
+                        <div className="absolute right-1 top-1 w-3 h-3 md:w-4 md:h-4 bg-white rounded-full shadow-md" />
                       </div>
                     </div>
                   ))}
@@ -246,7 +251,7 @@ export default function ProfilePage() {
                 <Button 
                   type="submit" 
                   disabled={isLoading}
-                  className="h-14 rounded-2xl px-12 font-bold text-lg gap-2 shadow-lg shadow-primary/20"
+                  className="w-full sm:w-auto h-14 rounded-2xl px-12 font-bold text-lg gap-2 shadow-lg shadow-primary/20"
                 >
                   {isLoading ? (
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />

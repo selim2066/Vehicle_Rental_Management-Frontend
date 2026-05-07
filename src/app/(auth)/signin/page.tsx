@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Car, Mail, Lock, ArrowRight, Command, Globe } from "lucide-react";
+import { Car, Mail, Lock, ArrowRight, Command, Globe, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
@@ -10,6 +10,7 @@ import { useAuth } from "@/components/providers/auth-provider";
 
 export default function SigninPage() {
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: "",
@@ -78,14 +79,21 @@ export default function SigninPage() {
               <div className="relative group">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
                 <Input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   placeholder="Password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="h-14 pl-12 rounded-2xl bg-background/50 border-border/40 focus:border-primary/50 focus:ring-primary/20 transition-all"
+                  className="h-14 pl-12 pr-12 rounded-2xl bg-background/50 border-border/40 focus:border-primary/50 focus:ring-primary/20 transition-all"
                   required
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors focus:outline-none"
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
               </div>
               <div className="flex justify-end">
                 <Link href="/forgot-password" className="text-xs font-semibold text-primary hover:underline">
@@ -105,16 +113,26 @@ export default function SigninPage() {
           </form>
 
           {/* Quick Access / Demo Login */}
-          <div className="mt-6">
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Button
               variant="outline"
-              className="w-full h-14 rounded-2xl border-dashed border-primary/40 hover:bg-primary/5 text-primary font-bold gap-2"
+              className="h-14 rounded-2xl border-dashed border-primary/40 hover:bg-primary/5 text-primary font-bold gap-2 px-4"
               onClick={() => {
                 setFormData({ email: "mdselimreza2066@gmail.com", password: "admin123" });
               }}
             >
-              <Command className="w-5 h-5" />
-              Demo Login (Admin)
+              <Command className="w-5 h-5 flex-shrink-0" />
+              <span className="truncate">Admin Demo</span>
+            </Button>
+            <Button
+              variant="outline"
+              className="h-14 rounded-2xl border-dashed border-emerald-500/40 hover:bg-emerald-500/5 text-emerald-600 font-bold gap-2 px-4"
+              onClick={() => {
+                setFormData({ email: "selimrezaibnal@gmail.com", password: "selim123" });
+              }}
+            >
+              <Globe className="w-5 h-5 flex-shrink-0" />
+              <span className="truncate">Customer Demo</span>
             </Button>
           </div>
 

@@ -56,7 +56,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser(user);
         setToken(token);
         localStorage.setItem("token", token);
-        toast.success("Welcome back, " + user.full_name);
+        toast.success("Assalamu Alaikum, " + user.name);
         router.push("/");
       }
     } catch (error: any) {
