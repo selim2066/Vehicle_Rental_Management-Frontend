@@ -95,6 +95,7 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 }
+
 :root {
   --background: oklch(0.99 0.005 240);
   --foreground: oklch(0.15 0.02 240);
@@ -102,13 +103,16 @@
   --card-foreground: oklch(0.15 0.02 240);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.15 0.02 240);
-  --primary: oklch(0.55 0.22 260); /* Premium Indigo */
+  --primary: oklch(0.55 0.22 260);
+  /* Premium Indigo */
   --primary-foreground: oklch(0.98 0.01 260);
-  --secondary: oklch(0.85 0.15 80); /* Muted Gold/Amber */
+  --secondary: oklch(0.85 0.15 80);
+  /* Muted Gold/Amber */
   --secondary-foreground: oklch(0.25 0.1 80);
   --muted: oklch(0.96 0.01 240);
   --muted-foreground: oklch(0.45 0.05 240);
-  --accent: oklch(0.65 0.2 160); /* Action Emerald */
+  --accent: oklch(0.65 0.2 160);
+  /* Action Emerald */
   --accent-foreground: oklch(0.98 0.01 160);
   --destructive: oklch(0.55 0.2 25);
   --destructive-foreground: oklch(0.98 0.01 25);
@@ -120,7 +124,8 @@
   --chart-3: oklch(0.85 0.15 80);
   --chart-4: oklch(0.45 0.25 280);
   --chart-5: oklch(0.5 0.2 320);
-  --radius: 1rem; /* More premium rounded corners */
+  --radius: 1rem;
+  /* More premium rounded corners */
   --sidebar: oklch(0.99 0.005 240);
   --sidebar-foreground: oklch(0.15 0.02 240);
   --sidebar-primary: oklch(0.55 0.22 260);
@@ -139,7 +144,8 @@
   --card-foreground: oklch(0.98 0.01 260);
   --popover: oklch(0.16 0.02 260);
   --popover-foreground: oklch(0.98 0.01 260);
-  --primary: oklch(0.65 0.18 260); /* Bright Indigo for Dark Mode */
+  --primary: oklch(0.65 0.18 260);
+  /* Bright Indigo for Dark Mode */
   --primary-foreground: oklch(0.12 0.015 260);
   --secondary: oklch(0.75 0.15 80);
   --secondary-foreground: oklch(0.15 0.02 80);
@@ -173,16 +179,25 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   html {
     @apply font-sans;
   }
 }
+
 /* Hide default scrollbar */
-::-webkit-scrollbar { display: none; }
-html { -ms-overflow-style: none; scrollbar-width: none; }
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 .custom-scrollbar::-webkit-scrollbar {
   display: block;

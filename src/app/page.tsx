@@ -37,21 +37,21 @@ export default async function Home() {
       <Categories />
 
       {/* Featured Fleet Section */}
-      <section className="py-24 bg-background">
-        <div className="max-w-8xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+      <section className="py-32 bg-background">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
             <div className="space-y-4">
-              <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 tracking-tight">Featured Fleet</h2>
-              <p className="text-foreground/60 max-w-xl text-lg">
+              <h2 className="text-5xl md:text-6xl font-heading font-extrabold tracking-tight">Featured Fleet</h2>
+              <p className="text-muted-foreground max-w-xl text-lg md:text-xl leading-relaxed">
                 Explore our curated selection of high-performance and luxury vehicles, available for immediate rental.
               </p>
             </div>
             <Link
               href="/vehicles"
-              className={cn(buttonVariants({ variant: "outline" }), "rounded-full px-8 h-12 gap-2 border-border/40 group")}
+              className={cn(buttonVariants({ variant: "outline" }), "rounded-full px-8 h-14 text-base font-bold gap-3 border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300 group")}
             >
               Explore Full Fleet
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
 
