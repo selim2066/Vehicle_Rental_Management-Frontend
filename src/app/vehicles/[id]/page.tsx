@@ -46,7 +46,7 @@ export default async function VehicleDetailsPage({ params }: { params: Promise<{
 
       {/* Hero Section with Breadcrumbs */}
       <section className="pt-32 pb-12 px-6">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-8xl mx-auto">
           <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground mb-8">
             <Link href="/" className="hover:text-primary transition-colors">Home</Link>
             <ChevronRight className="w-4 h-4" />
@@ -64,7 +64,7 @@ export default async function VehicleDetailsPage({ params }: { params: Promise<{
                     <Star className="w-3.4 h-3.4 fill-primary" />
                     Premium Selection
                   </div>
-                  <h1 className="text-5xl md:text-7xl font-heading font-bold tracking-tight mb-6">
+                  <h1 className="text-5xl md:text-8xl font-heading font-bold tracking-tight mb-6">
                     {vehicle.vehicle_name} <span className="text-primary italic">{vehicle.year}</span>
                   </h1>
                   <div className="flex flex-wrap items-center gap-8 text-muted-foreground">
@@ -155,8 +155,8 @@ export default async function VehicleDetailsPage({ params }: { params: Promise<{
                 </div>
               </div>
 
-              <ReviewSection 
-                vehicleId={vehicle.id} 
+              <ReviewSection
+                vehicleId={vehicle.id}
                 initialAverageRating={vehicle.average_rating}
                 initialTotalReviews={vehicle.total_reviews}
               />
@@ -175,7 +175,7 @@ export default async function VehicleDetailsPage({ params }: { params: Promise<{
       {/* Related Vehicles Section */}
       {relatedVehicles.length > 0 && (
         <section className="py-24 border-t border-border/40 bg-muted/10">
-          <div className="max-w-7xl mx-auto px-6">
+          <div className="max-w-8xl mx-auto px-6">
             <h3 className="text-4xl font-bold mb-12 tracking-tight">You might also like</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {relatedVehicles.map((v) => (

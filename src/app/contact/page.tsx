@@ -33,7 +33,7 @@ export default function ContactPage() {
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(var(--primary-rgb),0.1),transparent_50%)]" />
-        <div className="max-w-7xl mx-auto text-center relative z-10">
+        <div className="max-w-8xl mx-auto text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -42,7 +42,7 @@ export default function ContactPage() {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6">
               Get in Touch
             </div>
-            <h1 className="text-5xl md:text-7xl font-heading font-bold mb-6 tracking-tight">
+            <h1 className="text-5xl md:text-8xl font-heading font-bold mb-6 tracking-tight">
               Let&apos;s Start a <span className="text-primary italic">Conversation.</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -54,7 +54,7 @@ export default function ContactPage() {
 
       {/* Content Section */}
       <section className="pb-32 px-6">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-8xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
             {/* Contact Info */}
             <div className="lg:col-span-5 space-y-12">

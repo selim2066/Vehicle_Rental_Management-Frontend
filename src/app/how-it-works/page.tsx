@@ -16,7 +16,7 @@ export default function HowItWorksPage() {
       {/* Hero / Intro section for the page */}
       <section className="pt-40 pb-20 px-6 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(var(--primary-rgb),0.1),transparent_50%)]" />
-        <div className="max-w-7xl mx-auto text-center relative z-10">
+        <div className="max-w-8xl mx-auto text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -26,7 +26,7 @@ export default function HowItWorksPage() {
               <span>Quick Guide</span>
               <ChevronRight className="w-4 h-4" />
             </div>
-            <h1 className="text-5xl md:text-7xl font-heading font-bold tracking-tight max-w-4xl">
+            <h1 className="text-5xl md:text-8xl font-heading font-bold tracking-tight max-w-4xl">
               Seamless Rentals, <span className="text-primary">Exceptional</span> Journeys
             </h1>
             <p className="text-foreground/60 text-lg md:text-xl max-w-2xl">

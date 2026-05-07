@@ -50,18 +50,18 @@ export default function Statistics() {
         <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-white blur-3xl" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-8xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {stats.map((stat, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, scale: 0.8, y: 20 }}
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ 
+              transition={{
                 type: "spring",
                 damping: 20,
                 stiffness: 100,
-                delay: i * 0.1 
+                delay: i * 0.1
               }}
               viewport={{ once: false }}
               className="text-center group"

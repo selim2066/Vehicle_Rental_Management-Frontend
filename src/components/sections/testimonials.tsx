@@ -9,7 +9,7 @@ const testimonials = [
     name: "Ahmed Al-Sayed",
     role: "Business Executive",
     content: "The premium service and vehicle quality were outstanding. Vroom made my business trip across Dhaka seamless and stylish.",
-    image: "/images/client-1.png",
+    image: "/images/client-1.jpeg",
     rating: 5,
   },
   {
@@ -31,7 +31,7 @@ const testimonials = [
 export default function Testimonials() {
   return (
     <section className="py-24 bg-background">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-8xl mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
           <div className="space-y-4">
             <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight">What Our Clients Say</h2>
@@ -48,9 +48,9 @@ export default function Testimonials() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               whileHover={{ y: -10 }}
-              transition={{ 
+              transition={{
                 y: { type: "spring", stiffness: 300, damping: 20 },
-                default: { delay: i * 0.1 } 
+                default: { delay: i * 0.1 }
               }}
               viewport={{ once: false }}
               className="p-10 rounded-[3rem] bg-card border border-border/40 relative group hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500"

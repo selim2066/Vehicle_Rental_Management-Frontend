@@ -29,7 +29,7 @@ const highlights = [
 export default function Highlights() {
   return (
     <section className="py-24 bg-background overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-8xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
           <div className="space-y-8">
             <h2 className="text-4xl md:text-6xl font-heading font-bold tracking-tight leading-[1.1]">
@@ -61,9 +61,9 @@ export default function Highlights() {
               viewport={{ once: false }}
               className="relative aspect-square rounded-[4rem] overflow-hidden group shadow-2xl shadow-primary/20"
             >
-              <img 
-                src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=1200&auto=format&fit=crop" 
-                alt="Premium Interior" 
+              <img
+                src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=1200&auto=format&fit=crop"
+                alt="Premium Interior"
                 className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />

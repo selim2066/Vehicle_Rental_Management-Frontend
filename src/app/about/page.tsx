@@ -16,13 +16,13 @@ export default function AboutPage() {
     <main className="min-h-screen pt-24 bg-background">
       <Navbar />
       <section className="min-h-[80vh] flex items-center px-6 py-20">
-        <div className="max-w-7xl mx-auto w-full">
+        <div className="max-w-8xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="order-2 lg:order-1">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6">
                 Our Story
               </div>
-              <h1 className="text-5xl md:text-7xl font-heading font-bold mb-8 leading-tight">
+              <h1 className="text-5xl md:text-8xl font-heading font-bold mb-8 leading-tight">
                 Redefining the <span className="text-primary italic">Drive.</span>
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl">
@@ -55,32 +55,32 @@ export default function AboutPage() {
         </div>
       </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 py-20 border-y border-border/40">
-            {[
-              { title: "Safety First", desc: "Every vehicle undergoes a rigorous 150-point inspection before every rental.", icon: Shield },
-              { title: "Customer Obsessed", desc: "Our 24/7 concierge team is always available to assist with any request.", icon: Users },
-              { title: "Sustainable Future", desc: "We are committed to transitioning 50% of our fleet to electric by 2026.", icon: Globe },
-            ].map((feature) => (
-              <div key={feature.title} className="text-center">
-                <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 text-primary">
-                  <feature.icon className="w-8 h-8" />
-                </div>
-                <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{feature.desc}</p>
-              </div>
-            ))}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 py-20 border-y border-border/40">
+        {[
+          { title: "Safety First", desc: "Every vehicle undergoes a rigorous 150-point inspection before every rental.", icon: Shield },
+          { title: "Customer Obsessed", desc: "Our 24/7 concierge team is always available to assist with any request.", icon: Users },
+          { title: "Sustainable Future", desc: "We are committed to transitioning 50% of our fleet to electric by 2026.", icon: Globe },
+        ].map((feature) => (
+          <div key={feature.title} className="text-center">
+            <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 text-primary">
+              <feature.icon className="w-8 h-8" />
+            </div>
+            <h3 className="text-xl font-bold mb-4">{feature.title}</h3>
+            <p className="text-muted-foreground leading-relaxed">{feature.desc}</p>
           </div>
+        ))}
+      </div>
 
-          <div className="mt-32 text-center">
-            <h2 className="text-4xl font-heading font-bold mb-8">Join the Vroom Community</h2>
-            <p className="text-muted-foreground max-w-xl mx-auto mb-12">
-              Stay updated with our latest additions and exclusive member events.
-            </p>
-            <Link href="/signup" className={cn(buttonVariants({ size: "lg" }), "rounded-full px-10 h-14 font-bold group")}>
-              Become a Member
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
+      <div className="mt-32 text-center">
+        <h2 className="text-4xl font-heading font-bold mb-8">Join the Vroom Community</h2>
+        <p className="text-muted-foreground max-w-xl mx-auto mb-12">
+          Stay updated with our latest additions and exclusive member events.
+        </p>
+        <Link href="/signup" className={cn(buttonVariants({ size: "lg" }), "rounded-full px-10 h-14 font-bold group")}>
+          Become a Member
+          <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+        </Link>
+      </div>
     </main>
   );
 }

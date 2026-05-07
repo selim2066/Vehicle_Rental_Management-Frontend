@@ -39,7 +39,7 @@ const steps = [
 
 const StepCard = ({ step, index }: { step: typeof steps[0]; index: number }) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     if (cardRef.current) {
       // GSAP shadow pulse animation synced with float
@@ -60,8 +60,8 @@ const StepCard = ({ step, index }: { step: typeof steps[0]; index: number }) => 
       initial={{ y: 60, opacity: 0 }}
       whileInView={{ y: 0, opacity: 1 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ 
-        duration: 0.8, 
+      transition={{
+        duration: 0.8,
         delay: index * 0.15,
         ease: [0.21, 1.11, 0.81, 0.99] // Custom spring-like curve
       }}
@@ -75,15 +75,15 @@ const StepCard = ({ step, index }: { step: typeof steps[0]; index: number }) => 
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        whileHover={{ 
-          y: -24, 
+        whileHover={{
+          y: -24,
           scale: 1.03,
-          transition: { type: "spring", stiffness: 300, damping: 20 } 
+          transition: { type: "spring", stiffness: 300, damping: 20 }
         }}
         className="h-full p-8 rounded-[2.5rem] bg-card/60 backdrop-blur-xl border border-border/40 flex flex-col items-center text-center gap-6 shadow-[0_8px_40px_rgba(var(--primary-rgb),0.12)] transition-shadow duration-500 hover:shadow-[0_20px_60px_rgba(var(--primary-rgb),0.28)]"
       >
         {/* Ghost Number */}
-        <motion.span 
+        <motion.span
           className="absolute -top-4 left-1/2 -translate-x-1/2 text-[10rem] font-bold opacity-[0.03] pointer-events-none select-none z-0"
           whileHover={{ y: -4 }}
         >
@@ -91,7 +91,7 @@ const StepCard = ({ step, index }: { step: typeof steps[0]; index: number }) => 
         </motion.span>
 
         {/* Icon Badge */}
-        <motion.div 
+        <motion.div
           className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center relative z-10"
           whileHover={{ rotate: 8, scale: 1.15 }}
         >
@@ -154,7 +154,7 @@ export default function HowItWorks() {
       {/* Background ambient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 relative">
+      <div className="max-w-8xl mx-auto px-6 relative">
         {/* Header */}
         <div className="text-center space-y-4 mb-24">
           <motion.span
@@ -164,7 +164,7 @@ export default function HowItWorks() {
           >
             Simple Process
           </motion.span>
-          
+
           <h2 className="text-4xl md:text-6xl font-heading font-bold tracking-tight overflow-hidden">
             {words.map((word, i) => (
               <motion.span
@@ -179,7 +179,7 @@ export default function HowItWorks() {
               </motion.span>
             ))}
           </h2>
-          
+
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}

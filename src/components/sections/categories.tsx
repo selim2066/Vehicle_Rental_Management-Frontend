@@ -39,7 +39,7 @@ const categories = [
 export default function Categories() {
   return (
     <section className="py-24 bg-muted/30">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-8xl mx-auto px-6">
         <div className="text-center mb-16 space-y-4">
           <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight">Browse by Category</h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">

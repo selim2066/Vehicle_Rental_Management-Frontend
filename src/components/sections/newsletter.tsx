@@ -12,10 +12,10 @@ export default function Newsletter() {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false }}
-        className="max-w-7xl mx-auto rounded-[4rem] bg-card border border-border/40 overflow-hidden relative group"
+        className="max-w-8xl mx-auto rounded-[4rem] bg-card border border-border/40 overflow-hidden relative group"
       >
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 pointer-events-none" />
-        
+
         <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-16 p-12 md:p-24 items-center">
           <div className="space-y-6">
             <div className="w-16 h-16 rounded-[2rem] bg-primary/10 flex items-center justify-center">
@@ -31,9 +31,9 @@ export default function Newsletter() {
 
           <div className="relative">
             <form className="flex flex-col sm:flex-row gap-4 p-3 rounded-[2.5rem] bg-muted/50 border border-border/40 focus-within:border-primary/40 transition-colors">
-              <Input 
-                type="email" 
-                placeholder="Enter your email address" 
+              <Input
+                type="email"
+                placeholder="Enter your email address"
                 className="h-14 bg-transparent border-none focus-visible:ring-0 text-lg px-6 rounded-full"
                 required
               />

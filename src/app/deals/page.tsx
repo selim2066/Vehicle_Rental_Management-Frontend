@@ -33,13 +33,13 @@ export default function DealsPage() {
     <main className="min-h-screen pt-24 bg-background">
       <Navbar />
       <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-8xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6">
               <Tag className="w-3 h-3" />
               Exclusive Offers
             </div>
-            <h1 className="text-5xl md:text-7xl font-heading font-bold mb-6">Premium <span className="text-primary italic">Savings</span></h1>
+            <h1 className="text-5xl md:text-8xl font-heading font-bold mb-6">Premium <span className="text-primary italic">Savings</span></h1>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Luxury doesn't have to be expensive. Explore our handpicked deals and drive your dream car for less.
             </p>
@@ -49,7 +49,7 @@ export default function DealsPage() {
             {deals.map((deal) => (
               <div key={deal.title} className="group relative bg-card border border-border/40 rounded-[2.5rem] p-10 overflow-hidden hover:border-primary/40 transition-all duration-500">
                 <div className={cn("absolute top-0 right-0 w-32 h-32 blur-[80px] opacity-20 -translate-x-1/2 -translate-y-1/2", deal.color)} />
-                
+
                 <div className="relative z-10">
                   <div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg", deal.color)}>
                     <Zap className="w-6 h-6" />

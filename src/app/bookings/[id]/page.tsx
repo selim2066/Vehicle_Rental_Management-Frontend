@@ -5,8 +5,8 @@ import { bookingService, Booking } from "@/services/booking.service";
 import { useRouter, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Navbar from "@/components/layout/navbar";
-import { 
-  ArrowLeft, Calendar, Car, CheckCircle2, 
+import {
+  ArrowLeft, Calendar, Car, CheckCircle2,
   CreditCard, ShieldCheck, MapPin, Star,
   Info, Zap, ChevronRight
 } from "lucide-react";
@@ -58,7 +58,7 @@ export default function BookingDetailsPage() {
 
   const handleCancel = async () => {
     if (!booking) return;
-    
+
     setIsCancelling(true);
     try {
       const storedToken = localStorage.getItem("token") || token;
@@ -92,9 +92,9 @@ export default function BookingDetailsPage() {
     <main className="min-h-screen bg-background pb-20">
       <Navbar />
 
-      <div className="max-w-7xl mx-auto px-6 pt-32">
-        <Link 
-          href="/bookings" 
+      <div className="max-w-8xl mx-auto px-6 pt-32">
+        <Link
+          href="/bookings"
           className="inline-flex items-center gap-2 text-sm font-bold text-muted-foreground hover:text-primary transition-colors mb-12 group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -104,7 +104,7 @@ export default function BookingDetailsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           {/* Left Side: Vehicle Info & Large Image */}
           <div className="lg:col-span-7 space-y-12">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="space-y-6"
@@ -113,22 +113,22 @@ export default function BookingDetailsPage() {
                 <span className={cn(
                   "px-4 py-1.5 rounded-full text-[10px] font-bold uppercase border tracking-widest",
                   booking.status === 'active' ? "bg-green-500/10 text-green-500 border-green-500/20" :
-                  booking.status === 'returned' ? "bg-blue-500/10 text-blue-500 border-blue-500/20" :
-                  "bg-muted text-muted-foreground border-border"
+                    booking.status === 'returned' ? "bg-blue-500/10 text-blue-500 border-blue-500/20" :
+                      "bg-muted text-muted-foreground border-border"
                 )}>
                   {booking.status}
                 </span>
                 <span className="text-muted-foreground text-xs font-medium">Ref: #{booking.id}</span>
               </div>
-              
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-heading font-bold tracking-tight">
+
+              <h1 className="text-4xl md:text-5xl lg:text-8xl font-heading font-bold tracking-tight">
                 {booking.vehicles?.vehicle_name}
               </h1>
 
               <div className="relative aspect-[16/9] rounded-[3rem] overflow-hidden border border-border/40 shadow-2xl">
                 {booking.vehicles?.vehicle_images?.[0]?.image_url ? (
-                  <Image 
-                    src={booking.vehicles.vehicle_images[0].image_url} 
+                  <Image
+                    src={booking.vehicles.vehicle_images[0].image_url}
                     alt={booking.vehicles.vehicle_name}
                     fill
                     className="object-cover"
@@ -142,7 +142,7 @@ export default function BookingDetailsPage() {
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-8">
-               <div className="space-y-6">
+              <div className="space-y-6">
                 <h4 className="text-2xl font-bold flex items-center gap-3">
                   <Zap className="w-6 h-6 text-primary" />
                   Vehicle Specs
@@ -184,13 +184,13 @@ export default function BookingDetailsPage() {
           {/* Right Side: Order Summary Card */}
           <div className="lg:col-span-5">
             <div className="sticky top-32 space-y-8">
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="bg-card border border-border/40 rounded-[3rem] p-10 shadow-2xl shadow-primary/5"
               >
                 <h3 className="text-2xl font-bold mb-8">Order Summary</h3>
-                
+
                 <div className="space-y-8">
                   <div className="grid grid-cols-2 gap-6">
                     <div className="space-y-2">
@@ -224,16 +224,16 @@ export default function BookingDetailsPage() {
 
                   <div className="space-y-4 pt-4">
                     {booking.status === 'active' && (
-                      <Button 
-                        variant="destructive" 
+                      <Button
+                        variant="destructive"
                         className="w-full h-16 rounded-2xl font-bold text-lg"
                         onClick={() => setIsConfirmOpen(true)}
                       >
                         Cancel Booking
                       </Button>
                     )}
-                    <Link 
-                      href="/vehicles" 
+                    <Link
+                      href="/vehicles"
                       className={cn("w-full h-16 rounded-2xl font-bold text-lg flex items-center justify-center border-2 border-border/40 hover:bg-muted transition-colors")}
                     >
                       Rent Another Car
@@ -261,7 +261,7 @@ export default function BookingDetailsPage() {
         </div>
       </div>
 
-      <ConfirmationModal 
+      <ConfirmationModal
         isOpen={isConfirmOpen}
         onClose={() => setIsConfirmOpen(false)}
         onConfirm={handleCancel}
