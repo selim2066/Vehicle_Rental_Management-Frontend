@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/components/providers/auth-provider";
+import Link from "next/link";
 import { 
   Car, Calendar as CalendarIcon, 
   Search, Filter, ChevronRight,
