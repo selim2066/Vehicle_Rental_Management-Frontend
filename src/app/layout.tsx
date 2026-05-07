@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Outfit } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/providers/smooth-scroll-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
@@ -8,29 +9,21 @@ import { Toaster } from "@/components/ui/sonner";
 import Footer from "@/components/layout/footer";
 import { CarScrollbar } from "@/components/ui/car-scrollbar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://vroom-rentals.vercel.app"),
   title: {
     default: "Vroom | Premium Vehicle Rental & Luxury Fleet",
-    template: "%s | Vroom"
+    template: "%s | Vroom",
   },
-  description: "Experience the ultimate in luxury and performance with Vroom. Our premium fleet and seamless booking system make your next journey unforgettable.",
-  keywords: ["luxury car rental", "premium vehicles", "car hire dhaka", "vroom rentals", "sports car rental"],
+  description:
+    "Experience the ultimate in luxury and performance with Vroom. Our premium fleet and seamless booking system make your next journey unforgettable.",
+  keywords: [
+    "luxury car rental",
+    "premium vehicles",
+    "car hire dhaka",
+    "vroom rentals",
+    "sports car rental",
+  ],
   authors: [{ name: "Vroom Team" }],
   openGraph: {
     type: "website",
@@ -38,7 +31,8 @@ export const metadata: Metadata = {
     url: "https://vroom-rentals.vercel.app",
     siteName: "Vroom",
     title: "Vroom | Premium Vehicle Rental & Luxury Fleet",
-    description: "Rent the world's most premium vehicles with ease. High-performance sports cars, luxury sedans, and spacious SUVs.",
+    description:
+      "Rent the world's most premium vehicles with ease. High-performance sports cars, luxury sedans, and spacious SUVs.",
     images: [
       {
         url: "/og-image.jpg",
@@ -56,7 +50,6 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -64,9 +57,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Outfit loaded via CDN at runtime — avoids build-time Google Fonts fetch */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body
         suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} antialiased selection:bg-primary/30 selection:text-primary-foreground font-sans bg-background text-foreground transition-colors duration-300`}
+        className={`${GeistSans.variable} ${GeistMono.variable} antialiased selection:bg-primary/30 selection:text-primary-foreground font-sans bg-background text-foreground transition-colors duration-300`}
       >
         <ThemeProvider
           attribute="class"
@@ -78,9 +80,7 @@ export default function RootLayout({
           <AuthProvider>
             <SmoothScrollProvider>
               <div className="flex flex-col min-h-screen">
-                <div className="flex-grow">
-                  {children}
-                </div>
+                <div className="flex-grow">{children}</div>
                 <Footer />
               </div>
             </SmoothScrollProvider>
