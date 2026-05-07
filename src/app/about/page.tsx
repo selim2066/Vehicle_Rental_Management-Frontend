@@ -15,17 +15,17 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen pt-24 bg-background">
       <Navbar />
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-32">
-            <div>
+      <section className="min-h-[80vh] flex items-center px-6 py-20">
+        <div className="max-w-7xl mx-auto w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div className="order-2 lg:order-1">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6">
                 Our Story
               </div>
               <h1 className="text-5xl md:text-7xl font-heading font-bold mb-8 leading-tight">
                 Redefining the <span className="text-primary italic">Drive.</span>
               </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+              <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl">
                 At Vroom, we believe that renting a car should be more than just a transaction. It should be the start of an adventure. Since 2026, we've been curating a fleet of the world's most exceptional vehicles to ensure that every journey you take is memorable.
               </p>
               <div className="grid grid-cols-2 gap-8">
@@ -37,21 +37,23 @@ export default function AboutPage() {
                 ))}
               </div>
             </div>
-            <div className="relative">
-              <div className="aspect-[4/5] rounded-[3rem] overflow-hidden shadow-2xl">
+            <div className="relative order-1 lg:order-2">
+              <div className="aspect-[4/5] lg:aspect-square rounded-[3rem] overflow-hidden shadow-2xl border border-white/10">
                 <img
-                  src="https://images.unsplash.com/photo-1549399542-7e3f8b79c3d9?q=80&w=800&auto=format&fit=crop"
+                  src="/images/about-heritage.png"
                   className="w-full h-full object-cover"
                   alt="Our Heritage"
                 />
               </div>
-              <div className="absolute -bottom-10 -left-10 bg-card border border-border/40 p-8 rounded-[2rem] shadow-xl max-w-xs hidden md:block">
-                <Trophy className="w-10 h-10 text-primary mb-4" />
-                <p className="font-bold text-lg mb-1">Award Winning Service</p>
-                <p className="text-sm text-muted-foreground">Voted #1 Premium Rental Service in the region for 3 consecutive years.</p>
+              <div className="absolute -bottom-6 -left-6 lg:-bottom-10 lg:-left-10 bg-card/80 backdrop-blur-xl border border-border/40 p-6 lg:p-8 rounded-[2rem] shadow-2xl max-w-xs hidden md:block z-10">
+                <Trophy className="w-8 h-8 lg:w-10 lg:h-10 text-primary mb-4" />
+                <p className="font-bold text-base lg:text-lg mb-1">Award Winning Service</p>
+                <p className="text-xs lg:text-sm text-muted-foreground">Voted #1 Premium Rental Service for 3 consecutive years.</p>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 py-20 border-y border-border/40">
             {[
@@ -79,8 +81,6 @@ export default function AboutPage() {
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
-        </div>
-      </section>
     </main>
   );
 }

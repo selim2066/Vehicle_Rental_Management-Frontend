@@ -121,16 +121,16 @@ export default function Hero() {
           transition={{ type: "spring", stiffness: 400, damping: 30 }}
           className="relative aspect-[4/5] lg:aspect-square group perspective-1000"
         >
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10" />
-          <div className="relative w-full h-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+          <div className="relative w-full h-full rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl bg-muted">
             <Image
               src="/images/entop-simurgh.png"
               alt="Entop Simurgh Hypercar"
               fill
               priority
               sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover group-hover:scale-105 transition-transform duration-700"
+              className="object-cover group-hover:scale-105 transition-transform duration-700 rounded-[2rem]"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent z-10" />
           </div>
 
           {/* Floating Card */}
