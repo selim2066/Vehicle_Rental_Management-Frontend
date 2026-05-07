@@ -29,7 +29,7 @@ const highlights = [
 export default function Highlights() {
   return (
     <section className="py-24 bg-background overflow-hidden">
-      <div className="max-w-8xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
           <div className="space-y-8">
             <h2 className="text-4xl md:text-6xl font-heading font-bold tracking-tight leading-[1.1]">

@@ -30,7 +30,7 @@ export default function VehicleCard({ vehicle }: VehicleCardProps) {
           className="object-cover transition-transform duration-1000 group-hover:scale-110 rounded-[2.5rem]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        
+
         <div className="absolute top-5 left-5 z-10">
           <div className="bg-primary/90 text-primary-foreground backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase border border-white/20 shadow-xl">
             {vehicle.brand}
@@ -50,7 +50,7 @@ export default function VehicleCard({ vehicle }: VehicleCardProps) {
       <div className="px-8 pb-8 pt-4">
         <div className="flex justify-between items-start mb-6">
           <div>
-            <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-1 group-hover:text-primary transition-colors line-clamp-1">
+            <h3 className="text-2xl md:text-xl font-bold tracking-tight mb-1 group-hover:text-primary transition-colors line-clamp-1">
               {vehicle.vehicle_name}
             </h3>
             <p className="text-xs text-muted-foreground uppercase tracking-widest font-bold">
@@ -59,7 +59,7 @@ export default function VehicleCard({ vehicle }: VehicleCardProps) {
           </div>
           <div className="text-right">
             <div className="flex items-baseline gap-1">
-              <span className="text-2xl md:text-3xl font-bold text-primary">${vehicle.daily_rent_price}</span>
+              <span className="text-2xl md:text-xl font-bold text-primary">${vehicle.daily_rent_price}</span>
               <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-tighter">/ day</span>
             </div>
           </div>
@@ -80,8 +80,8 @@ export default function VehicleCard({ vehicle }: VehicleCardProps) {
         </div>
 
         {/* Action Button */}
-        <Link 
-          href={`/vehicles/${vehicle.id}`} 
+        <Link
+          href={`/vehicles/${vehicle.id}`}
           className={cn(buttonVariants({}), "w-full rounded-2xl h-14 text-lg font-bold group/btn shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all duration-300")}
         >
           View Details

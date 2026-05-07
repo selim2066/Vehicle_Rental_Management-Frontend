@@ -30,12 +30,12 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-24 bg-background">
-      <div className="max-w-8xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+    <section className="py-32 bg-background">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
           <div className="space-y-4">
-            <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight">What Our Clients Say</h2>
-            <p className="text-muted-foreground text-lg max-w-xl">
+            <h2 className="text-5xl md:text-6xl font-heading font-extrabold tracking-tight">What Our Clients Say</h2>
+            <p className="text-muted-foreground text-lg md:text-xl max-w-xl">
               Don't just take our word for it. Hear from the people who drive with us every day.
             </p>
           </div>
