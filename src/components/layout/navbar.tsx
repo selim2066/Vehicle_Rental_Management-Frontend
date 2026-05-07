@@ -9,6 +9,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/components/providers/auth-provider";
 import { LogOut, LayoutDashboard } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 import {
   DropdownMenu,
@@ -23,19 +24,21 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const publicLinks = [
   { name: "Home", href: "/" },
-  { name: "Fleet", href: "/vehicles" },
+  { name: "Vehicles", href: "/vehicles" },
   { name: "Deals", href: "/deals" },
+  { name: "My Bookings", href: "/bookings" },
   { name: "How It Works", href: "/how-it-works" },
   { name: "Contact", href: "/contact" },
 ];
 
 const authLinks = [
   { name: "Home", href: "/" },
-  { name: "Fleet", href: "/vehicles" },
+  { name: "Vehicles", href: "/vehicles" },
   { name: "Deals", href: "/deals" },
+  { name: "My Bookings", href: "/bookings" },
   { name: "How It Works", href: "/how-it-works" },
   { name: "Contact", href: "/contact" },
-  { name: "My Bookings", href: "/bookings" },
+
 ];
 
 export default function Navbar() {
@@ -44,6 +47,7 @@ export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const { user, logout } = useAuth();
+  const pathname = usePathname();
 
   useEffect(() => {
     setMounted(true);
@@ -82,16 +86,25 @@ export default function Navbar() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {currentLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium text-foreground/70 hover:text-primary transition-colors relative group"
-            >
-              {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-            </Link>
-          ))}
+          {(mounted ? currentLinks : publicLinks).map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={cn(
+                  "text-sm font-medium transition-colors relative group",
+                  isActive ? "text-primary" : "text-foreground/70 hover:text-primary"
+                )}
+              >
+                {link.name}
+                <span className={cn(
+                  "absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300",
+                  isActive ? "w-full" : "w-0 group-hover:w-full"
+                )} />
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Actions */}
@@ -150,14 +163,14 @@ export default function Navbar() {
             </DropdownMenu>
           ) : (
             <div className="flex items-center gap-2">
-              <Link 
-                href="/signin" 
+              <Link
+                href="/signin"
                 className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "gap-2 rounded-full")}
               >
                 Sign In
               </Link>
-              <Link 
-                href="/signup" 
+              <Link
+                href="/signup"
                 className={cn(buttonVariants({ size: "sm" }), "rounded-full px-6 shadow-lg shadow-primary/20")}
               >
                 Join Now
@@ -184,11 +197,14 @@ export default function Navbar() {
           className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-2xl border-b border-white/10 p-6 md:hidden"
         >
           <div className="flex flex-col gap-4">
-            {currentLinks.map((link) => (
+            {(mounted ? currentLinks : publicLinks).map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-lg font-medium"
+                className={cn(
+                  "text-lg font-medium transition-colors",
+                  pathname === link.href ? "text-primary" : "text-foreground/70"
+                )}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.name}
@@ -197,25 +213,25 @@ export default function Navbar() {
             <hr className="border-border/40" />
             {user ? (
               <>
-                <Link 
-                  href="/dashboard" 
+                <Link
+                  href="/dashboard"
                   className="flex items-center gap-3 py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <LayoutDashboard className="w-5 h-5 text-primary" />
                   <span>Dashboard</span>
                 </Link>
-                <Link 
-                  href="/dashboard/profile" 
+                <Link
+                  href="/dashboard/profile"
                   className="flex items-center gap-3 py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <User className="w-5 h-5 text-primary" />
                   <span>Profile</span>
                 </Link>
-                <Button 
-                  className="w-full justify-start gap-3 text-destructive px-0" 
-                  variant="ghost" 
+                <Button
+                  className="w-full justify-start gap-3 text-destructive px-0"
+                  variant="ghost"
                   onClick={() => {
                     logout();
                     setMobileMenuOpen(false);
@@ -227,15 +243,15 @@ export default function Navbar() {
               </>
             ) : (
               <div className="flex flex-col gap-3">
-                <Link 
-                  href="/signin" 
+                <Link
+                  href="/signin"
                   className={cn(buttonVariants({ variant: "outline" }), "w-full rounded-full")}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Sign In
                 </Link>
-                <Link 
-                  href="/signup" 
+                <Link
+                  href="/signup"
                   className={cn(buttonVariants({}), "w-full rounded-full")}
                   onClick={() => setMobileMenuOpen(false)}
                 >

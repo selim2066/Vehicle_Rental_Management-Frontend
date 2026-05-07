@@ -200,13 +200,6 @@ export default function HowItWorks() {
           </div>
         </div>
       </div>
-
-      <style jsx global>{`
-        :root {
-          /* Providing a fallback for primary-rgb if not defined in globals.css */
-          --primary-rgb: 104, 117, 245; 
-        }
-      `}</style>
     </section>
   );
 }
