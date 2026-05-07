@@ -17,7 +17,7 @@
 ---
 
 ## 📋 Table of Contents
-
+<div classname="flex">
 - [Overview](#-overview)
 - [Live Demo](#-live-demo)
 - [Features](#-features)
@@ -31,6 +31,9 @@
 - [Deployment](#-deployment)
 - [Contributing](#-contributing)
 - [License](#-license)
+    
+</div>
+
 
 ---
 
@@ -311,7 +314,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 <div align="center">
 
-Made with ❤️ using Next.js & Tailwind CSS
+Made by Md Selim Reza
 
 **[⬆ Back to top](#-vroom--premium-vehicle-rental-platform)**
 
