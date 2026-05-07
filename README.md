@@ -17,22 +17,30 @@
 ---
 
 ## 📋 Table of Contents
-<div classname="flex">
-- [Overview](#-overview)
-- [Live Demo](#-live-demo)
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
-- [Environment Variables](#-environment-variables)
-- [Available Scripts](#-available-scripts)
-- [Pages & Routes](#-pages--routes)
-- [Backend Repository](#-backend-repository)
-- [Deployment](#-deployment)
-- [Contributing](#-contributing)
-- [License](#-license)
-    
-</div>
+
+<table>
+  <tr>
+    <td><a href="#-overview">Overview</a></td>
+    <td><a href="#-live-demo">Live Demo</a></td>
+    <td><a href="#-features">Features</a></td>
+    <td><a href="#-tech-stack">Tech Stack</a></td>
+  </tr>
+  <tr>
+    <td><a href="#-project-structure">Project Structure</a></td>
+    <td><a href="#-getting-started">Getting Started</a></td>
+    <td><a href="#-environment-variables">Environment Variables</a></td>
+    <td><a href="#-available-scripts">Available Scripts</a></td>
+  </tr>
+  <tr>
+    <td><a href="#-pages--routes">Pages & Routes</a></td>
+    <td><a href="#-backend-repository">Backend Repository</a></td>
+    <td><a href="#-deployment">Deployment</a></td>
+    <td><a href="#-contributing">Contributing</a></td>
+  </tr>
+  <tr>
+    <td><a href="#-license">License</a></td>
+  </tr>
+</table>
 
 
 ---
