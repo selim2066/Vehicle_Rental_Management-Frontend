@@ -1,5 +1,7 @@
 "use client";
 
+import { Vehicle } from "@/types";
+
 import { useAuth } from "@/components/providers/auth-provider";
 import { 
   Car, Plus, Search, Filter, 
@@ -27,7 +29,7 @@ import { ConfirmationModal } from "@/components/ui/confirmation-modal";
 
 export default function FleetManagementPage() {
   const { user } = useAuth();
-  const [vehicles, setVehicles] = useState<any[]>([]);
+  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [deleteId, setDeleteId] = useState<number | null>(null);

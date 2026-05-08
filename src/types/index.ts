@@ -12,6 +12,9 @@ export interface Vehicle {
   transmission: string;
   seats: number;
   is_featured: boolean;
+  color?: string;
+  mileage?: number;
+  description?: string;
   images: string[];
   features: string[];
   created_at: string;
