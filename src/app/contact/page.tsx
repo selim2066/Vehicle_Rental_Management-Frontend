@@ -53,45 +53,46 @@ export default function ContactPage() {
       </section>
 
       {/* Content Section */}
-      <section className="pb-32 px-6">
-        <div className="max-w-8xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+      {/* Content Section */}
+      <section className="pb-10 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
             {/* Contact Info */}
-            <div className="lg:col-span-5 space-y-12">
-              <div className="space-y-8">
-                <h2 className="text-3xl font-bold">Contact Information</h2>
-                <div className="space-y-6">
-                  {[
-                    { icon: MapPin, label: "Visit Us", value: "123 Premium Drive, Luxury District, Dhaka, Bangladesh" },
-                    { icon: Phone, label: "Call Us", value: "+880 1580-912090" },
-                    { icon: Mail, label: "Email Us", value: "mdselimreza2066@gmail.com" },
-                    { icon: Globe, label: "Portfolio", value: "porfolio-msr2000.vercel.app" },
-                  ].map((item, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.1 }}
-                      className="flex gap-6 p-6 rounded-3xl bg-card border border-border/40 hover:border-primary/40 transition-colors group"
-                    >
-                      <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                        <item.icon className="w-6 h-6" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-1">{item.label}</p>
-                        <p className="text-lg font-semibold">{item.value}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+            <div className="lg:col-span-5 space-y-4">
+              <h2 className="text-2xl font-bold">Contact Information</h2>
+              <div className="space-y-2">
+                {[
+                  { icon: MapPin, label: "Visit Us", value: "123 Premium Drive, Luxury District, Dhaka, Bangladesh" },
+                  { icon: Phone, label: "Call Us", value: "+880 1580-912090" },
+                  { icon: Mail, label: "Email Us", value: "mdselimreza2066@gmail.com" },
+                  { icon: Globe, label: "Portfolio", value: "portfolio-msr2000.vercel.app" },
+                ].map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.1 }}
+                    className="flex items-center gap-4 p-3 rounded-2xl bg-card border border-border/40 hover:border-primary/40 transition-colors group"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:scale-110 transition-transform">
+                      <item.icon className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">{item.label}</p>
+                      <p className="text-sm font-semibold">{item.value}</p>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
 
-              <div className="p-8 rounded-[2.5rem] bg-primary text-primary-foreground relative overflow-hidden shadow-2xl shadow-primary/20">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2" />
-                <div className="relative z-10 space-y-4">
-                  <Clock className="w-10 h-10 mb-2" />
-                  <h3 className="text-2xl font-bold">Business Hours</h3>
-                  <div className="space-y-2 opacity-90">
+              <div className="p-5 rounded-3xl bg-primary text-primary-foreground relative overflow-hidden">
+                <div className="relative z-10 space-y-2">
+                  <div className="flex items-center gap-2 mb-1">
+                    <Clock className="w-5 h-5" />
+                    <h3 className="text-lg font-bold">Business Hours</h3>
+                  </div>
+                  <div className="space-y-1 text-sm opacity-90">
                     <div className="flex justify-between">
                       <span>Monday - Friday</span>
                       <span className="font-bold">9:00 AM - 8:00 PM</span>
@@ -115,75 +116,56 @@ export default function ContactPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="bg-card border border-border/40 rounded-[3rem] p-8 md:p-12 shadow-2xl"
+                className="bg-card border border-border/40 rounded-3xl p-6 md:p-8"
               >
-                <div className="flex items-center gap-4 mb-10">
-                  <div className="w-12 h-12 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
-                    <MessageSquare className="w-6 h-6" />
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+                    <MessageSquare className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold">Send a Message</h3>
-                    <p className="text-muted-foreground">We typically respond within 2 hours</p>
+                    <h3 className="text-xl font-bold">Send a Message</h3>
+                    <p className="text-sm text-muted-foreground">We typically respond within 2 hours</p>
                   </div>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="name" className="text-sm font-bold ml-1">Full Name</Label>
-                      <Input
-                        id="name"
-                        placeholder="Md Selim Reza"
-                        required
-                        className="h-14 rounded-2xl bg-background/50 border-border/40 focus:ring-primary/20"
-                      />
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <Label htmlFor="name" className="text-xs font-bold ml-1 uppercase tracking-wide">Full Name</Label>
+                      <Input id="name" placeholder="Md Selim Reza" required className="h-11 rounded-xl" />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email" className="text-sm font-bold ml-1">Email Address</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="mdselimreza2066@gmail.com"
-                        required
-                        className="h-14 rounded-2xl bg-background/50 border-border/40 focus:ring-primary/20"
-                      />
+                    <div className="space-y-1">
+                      <Label htmlFor="email" className="text-xs font-bold ml-1 uppercase tracking-wide">Email Address</Label>
+                      <Input id="email" type="email" placeholder="mdselimreza2066@gmail.com" required className="h-11 rounded-xl" />
                     </div>
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="subject" className="text-sm font-bold ml-1">Subject</Label>
-                    <Input
-                      id="subject"
-                      placeholder="How can we help?"
-                      required
-                      className="h-14 rounded-2xl bg-background/50 border-border/40 focus:ring-primary/20"
-                    />
+                  <div className="space-y-1">
+                    <Label htmlFor="subject" className="text-xs font-bold ml-1 uppercase tracking-wide">Subject</Label>
+                    <Input id="subject" placeholder="How can we help?" required className="h-11 rounded-xl" />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="message" className="text-sm font-bold ml-1">Message</Label>
+                  <div className="space-y-1">
+                    <Label htmlFor="message" className="text-xs font-bold ml-1 uppercase tracking-wide">Message</Label>
                     <Textarea
                       id="message"
                       placeholder="Tell us more about your requirements..."
                       required
-                      className="min-h-[150px] rounded-2xl bg-background/50 border-border/40 focus:ring-primary/20 resize-none p-4"
+                      className="min-h-[100px] rounded-xl resize-none p-3"
                     />
                   </div>
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full h-16 rounded-2xl text-lg font-bold shadow-xl shadow-primary/20 group"
-                  >
+                  <Button type="submit" disabled={isSubmitting} className="w-full h-12 rounded-xl text-base font-bold group">
                     {isSubmitting ? (
-                      <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                     ) : (
                       <>
                         Send Message
-                        <Send className="ml-2 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                        <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                       </>
                     )}
                   </Button>
                 </form>
               </motion.div>
             </div>
+
           </div>
         </div>
       </section>
