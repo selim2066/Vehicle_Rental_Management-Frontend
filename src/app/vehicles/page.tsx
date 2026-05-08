@@ -35,7 +35,7 @@ export default async function VehiclesPage({
   }
 
   return (
-    <main className="min-h-screen pt-24 pb-24">
+    <main className="max-w-7xl mx-auto px-6min-h-screen pt-24 pb-24">
       <Navbar />
 
       {/* Header Section */}

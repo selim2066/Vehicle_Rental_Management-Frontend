@@ -30,7 +30,7 @@ export default function DealsPage() {
   ];
 
   return (
-    <main className="min-h-screen pt-24 bg-background">
+    <main className="max-w-7xl mx-auto px-6 min-h-screen pt-24 bg-background">
       <Navbar />
       <section className="py-20 px-6">
         <div className="max-w-8xl mx-auto">
