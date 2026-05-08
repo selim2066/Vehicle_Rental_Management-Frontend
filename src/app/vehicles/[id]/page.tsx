@@ -41,7 +41,7 @@ export default async function VehicleDetailsPage({ params }: { params: Promise<{
   }
 
   return (
-    <main className="min-h-screen bg-background pb-24">
+    <main className="min-h-screen bg-background pb-24 max-w-7xl mx-auto px-6">
       <Navbar />
 
       {/* Hero Section with Breadcrumbs */}
@@ -64,7 +64,7 @@ export default async function VehicleDetailsPage({ params }: { params: Promise<{
                     <Star className="w-3.4 h-3.4 fill-primary" />
                     Premium Selection
                   </div>
-                  <h1 className="text-5xl md:text-8xl font-heading font-bold tracking-tight mb-6">
+                  <h1 className="text-3xl md:text-5xl font-heading font-bold tracking-tight mb-6">
                     {vehicle.vehicle_name} <span className="text-primary italic">{vehicle.year}</span>
                   </h1>
                   <div className="flex flex-wrap items-center gap-8 text-muted-foreground">

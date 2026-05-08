@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 export default function CTA() {
   return (
     <section className="py-24 px-6">
-      <div className="max-w-8xl mx-auto">
+      <div className="max-w-7xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -26,9 +26,9 @@ export default function CTA() {
               Limited Time Offer
             </div>
 
-            <h2 className="text-4xl md:text-8xl font-heading font-bold text-white dark:text-foreground leading-[1.1] mb-8 tracking-tighter">
-              Ready to hit the <br />
-              <span className="italic">open road?</span>
+            <h2 className="text-4xl md:text-7xl font-heading font-bold text-white dark:text-foreground leading-[1.1] mb-8 tracking-tighter">
+              Ready to hit the <span className="text-primary italic">open road? </span>
+              <br />
             </h2>
 
             <p className="text-white/80 dark:text-muted-foreground max-w-xl mx-auto text-lg md:text-xl mb-12 font-medium">

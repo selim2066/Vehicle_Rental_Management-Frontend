@@ -195,11 +195,10 @@ export default function FleetManagementPage() {
                               <Eye className="w-4 h-4 text-primary" /> View Details
                             </Link>
                           </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => toast.info("Edit feature coming soon!")}
-                            className="rounded-xl font-bold py-3 cursor-pointer gap-2"
-                          >
-                            <Edit3 className="w-4 h-4 text-blue-500" /> Edit Vehicle
+                          <DropdownMenuItem asChild>
+                            <Link href={`/dashboard/vehicles/edit/${vehicle.id}`} className="rounded-xl font-bold py-3 cursor-pointer gap-2">
+                              <Edit3 className="w-4 h-4 text-blue-500" /> Edit Vehicle
+                            </Link>
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem 
