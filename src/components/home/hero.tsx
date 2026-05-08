@@ -60,7 +60,7 @@ export default function Hero() {
         <div className="z-10 flex flex-col">
           <h1
             ref={titleRef}
-            className="text-6xl md:text-8xl xl:text-[7rem] font-heading font-extrabold leading-[0.95] mb-10 tracking-tight"
+            className="text-5xl md:text-6xl xl:text-[5rem] font-heading font-extrabold leading-[0.95] mb-10 tracking-tight"
           >
             Drive the <br />
             <span className="text-primary italic font-serif">Future</span> of <br />
