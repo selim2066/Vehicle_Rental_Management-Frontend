@@ -92,7 +92,7 @@ export default function BookingDetailsPage() {
     <main className="min-h-screen bg-background pb-20">
       <Navbar />
 
-      <div className="max-w-8xl mx-auto px-6 pt-32">
+      <div className="max-w-7xl mx-auto px-6 pt-32">
         <Link
           href="/bookings"
           className="inline-flex items-center gap-2 text-sm font-bold text-muted-foreground hover:text-primary transition-colors mb-12 group"
